@@ -1,11 +1,11 @@
 
-from itertools import combinations, permutations
+from itertools import combinations, product
 from pathlib import Path
 from typing import List
 import random
 
 SAVE_PATH = "prompts.txt"
-MINI_SAVE_PATH = "mini_prompts.txt"
+MINI_SAVE_PATH = "mini_prompts2.txt"
 
 # COCO Classes, from https://docs.ultralytics.com/datasets/detect/coco/#dataset-yaml
 OBJECT_PATH = Path(__file__).parent / "coco_classes.txt"
@@ -74,17 +74,17 @@ def generate_prompts(objects):
         3 people and 2 cars
         ...
     """
-    prompts = set()
+    prompts = []
     for num_img_objects in range(1, MAX_IMG_OBJECTS + 1):
         for combo in combinations(objects, num_img_objects):
-            for count_permute in permutations(list(range(1, MAX_OBJ_QUANTITY + 1)) * num_img_objects, num_img_objects):
+            for count_permute in product(range(1, MAX_OBJ_QUANTITY + 1), repeat=num_img_objects):
                 prompt = ""
                 for i, obj in enumerate(combo):
                     if i > 0:
                         prompt += " and "
                     prompt += gen_prompt_quantifier_helper(obj, count_permute[i])
 
-                prompts.add(prompt)
+                prompts.append(prompt)
                 
     return prompts
 
@@ -100,10 +100,12 @@ def save_prompts(prompts: List[str], save_path: str = SAVE_PATH):
 
 if __name__ == "__main__":
     objects = get_objects()
-    # prompts = sorted(list(generate_prompts(objects)))
-    # save_prompts(prompts)
+    prompts = generate_prompts(objects)
+    save_prompts(prompts)
 
-    mini_objects = random.sample(objects, 10)
-    prompts = sorted(list(generate_prompts(mini_objects)))
-    save_prompts(prompts, MINI_SAVE_PATH)
+    # mini_objects = random.sample(objects, 10)
+    # prompts = generate_prompts(mini_objects)
+    # save_prompts(prompts, MINI_SAVE_PATH)
+
+
 
