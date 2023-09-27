@@ -28,7 +28,7 @@ handbag
 tie
 suitcase
 frisbee
-skis
+ski
 snowboard
 sports ball
 kite
@@ -74,7 +74,6 @@ refrigerator
 book
 clock
 vase
-scissors
 teddy bear
 hair drier
 toothbrush

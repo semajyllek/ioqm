@@ -100,10 +100,10 @@ def save_prompts(prompts: List[str], save_path: str = SAVE_PATH):
 
 if __name__ == "__main__":
     objects = get_objects()
-    prompts = sorted(list(generate_prompts(objects)))
-    save_prompts(prompts)
+    # prompts = sorted(list(generate_prompts(objects)))
+    # save_prompts(prompts)
 
-    # mini_objects = random.sample(objects, 10)
-    # prompts = sorted(list(generate_prompts(mini_objects)))
-    # save_prompts(prompts, MINI_SAVE_PATH)
+    mini_objects = random.sample(objects, 10)
+    prompts = sorted(list(generate_prompts(mini_objects)))
+    save_prompts(prompts, MINI_SAVE_PATH)
 
