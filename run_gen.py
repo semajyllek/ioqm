@@ -1,12 +1,12 @@
-from typing import Optional
 
-from utils import parse_objects_and_quantities
-from transformers import pipeline
+"""
+loads a dataset of prompts and generates images from them using a given model
+"""
+
+
+from typing import Optional, Tuple
 from datasets import load_dataset
-from pathlib import Path
 import os
-
-
 
 
 def run_gen(model_id: str, prompt_range: Optional[Tuple[int, int]] = None, icl_suffix: str = " on a table."):
@@ -36,16 +36,6 @@ def get_gen_model(model_id: str):
 	else:
 		raise ValueError("model not supported")
 	
-
-def evaluate(img_folder: str):
-	pipe = pipeline("object-detection", model="facebook/detr-resnet-50")
-	for file in os.listdir(img_folder):
-		img_path = os.path.join(img_folder, file)
-		objects = pipe(img_path)
-		obj_quants = parse_objects_and_quantities(' '.join(Path(file).name.split('_')))
-		print(objects)
-		print(obj_quants)
-		print("-----")
 
 
 
