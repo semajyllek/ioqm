@@ -15,10 +15,7 @@ This repo contains code for:
 ### results: TBD
 
 ***code to create prompts***:
-```python create_prompts.py --mini=True```
 
 ***code to generate images***:
-```python run_gen.py --model='stable-diffusion-v1-5'```
 
 ***code to evaluate generated images***:
-```python run_eval.py```

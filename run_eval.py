@@ -9,28 +9,45 @@ counts in the prompt vs the generated image
 from typing import Any, Dict, List, Optional, Tuple
 from utils import parse_objects_and_quantities
 from transformers import pipeline
+from functools import partial
+import concurrent.futures
 from pathlib import Path
 import json
 import os
 
 
-def evaluate(img_folder: str, detector: Optional[Any] = None) -> Tuple[Dict[str, float], Dict[str, float]]:
+WORKER_DIVISOR = 4
+
+def evaluate_single_image(img_path: str, detector: Any) -> Dict[str, float]:
+    detected_quants = get_obj_quants(detector(img_path))
+    prompt = ' '.join(Path(img_path).stem.split('_'))
+    expected_quants = parse_objects_and_quantities(prompt)
+    h_ioqm = hard_ioqm(expected_quants, detected_quants)
+    s_ioqm = soft_ioqm(expected_quants, detected_quants)
+    ioqm_result = {'hard_ioqm': h_ioqm, 'soft_ioqm': s_ioqm}
+    return prompt, ioqm_result
+
+def evaluate(img_folder: str, detector: Optional[Any] = None, mp: bool = False) -> Tuple[Dict[str, float], Dict[str, float]]:
     ioqms = dict(dict())
     if detector is None:
-         detector = pipeline("object-detection", model="facebook/detr-resnet-50")
-         
-    for img_file in os.listdir(img_folder):
-        prompt = ' '.join(Path(img_file).stem.split('_'))
-        img_path = os.path.join(img_folder, img_file)
-        detected_quants = get_obj_quants(detector(img_path))
-        expected_quants = parse_objects_and_quantities(prompt)
-        h_ioqm = hard_ioqm(expected_quants, detected_quants)
-        s_ioqm = soft_ioqm(expected_quants, detected_quants)
-        ioqms[prompt] = dict()
-        ioqms[prompt]['hard_ioqm'] = h_ioqm
-        ioqms[prompt]['soft_ioqm'] = s_ioqm
+        detector = pipeline("object-detection", model="facebook/detr-resnet-50")
+
+    image_files = [os.path.join(img_folder, img_file) for img_file in os.listdir(img_folder)]
     
+    # Create a partial function with fixed detector argument for mapping
+    evaluate_single_image_partial = partial(evaluate_single_image, detector=detector)
+
+    if mp:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=os.cpu_count() // WORKER_DIVISOR) as executor:
+            results = executor.map(evaluate_single_image_partial, image_files)
+    else:
+       results = executor.map(evaluate_single_image_partial, image_files)
+
+    for prompt, ioqm_result in results:
+        ioqms[prompt] = ioqm_result
+
     return ioqms
+
 
 
 def get_obj_quants(result: List[Dict[str, float]]) -> Dict[str, float]:
