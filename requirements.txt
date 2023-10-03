@@ -2,3 +2,6 @@ transformers
 diffusers
 accelerate 
 datasets
+timm
+invisible_watermark 
+safetensors
