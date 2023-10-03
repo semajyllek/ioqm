@@ -7,7 +7,7 @@ loads a dataset of prompts and generates images from them using a given model
 from typing import Any, Optional, Tuple
 
 from diffusers import DiffusionPipeline, StableDiffusionPipeline
-from datasets import load_dataset
+from datasets import load_dataset, Dataset
 
 from functools import partial
 
@@ -20,21 +20,31 @@ def run_gen(
 		model_id: str, 
 		prompt_range: Optional[Tuple[int, int]] = None, 
 		icl_suffix: str = " on a table.", 
-		save_path: str = "/content/drive/MyDrive/"
+		save_path: str = "",
+		prompt_ds: Optional[Dataset] = None
 ):
-  prompt_ds = load_dataset("semaj83/ioqm", data_files='mini_prompts.txt')['train']
-  if prompt_range is not None:
-    prompt_ds = prompt_ds.select(range(prompt_range[0], prompt_range[1]))
+	
+	prompt_ds = get_selected_prompt_dataset(prompt_ds, prompt_range) # load dataset of prompts
+	img_gen_pipe = get_img_gen_pipe(model_id)                        # load image generation pipeline
+	model_name = model_id.split('/')[-1]           	                 # get model name from model_id
+	
+	if not os.path.isdir(f"{save_path}{model_name}_images"):
+		os.mkdir(f"{save_path}{model_name}_images")
+		
+	for prompt in prompt_ds:
+		icl_prompt = prompt['text'] + icl_suffix                     # add " on a table." to prompt
+		image = img_gen_pipe(icl_prompt)
+		image.save(f"{save_path}{model_name}_images/{'_'.join(prompt['text'].split())}.png") # ex. 1_microwave_and_3_fire_hydrants_and_2_handbags.png
 
-  img_gen_pipe = get_img_gen_pipe(model_id)
-  model_name = model_id.split('/')[-1]
-  if not os.path.isdir(f"{save_path}{model_name}_images"):
-    os.mkdir(f"{save_path}{model_name}_images")
 
-  for prompt in prompt_ds:
-    icl_prompt = prompt['text'] + icl_suffix
-    image = img_gen_pipe(icl_prompt)
-    image.save(f"{save_path}{model_name}_images/{'_'.join(prompt['text'].split())}.png") # ex. 1_microwave_and_3_fire_hydrants_and_2_handbags.png
+def get_selected_prompt_dataset(prompt_ds: Optional[Dataset] = None, prompt_range: Optional[Tuple[int, int]] = None) -> Dataset:
+	if prompt_ds is None:
+		prompt_ds = load_dataset("semaj83/ioqm", data_files='mini_prompts.txt')['train']
+		
+	if prompt_range is not None:
+		prompt_ds = prompt_ds.select(range(prompt_range[0], prompt_range[1]))
+	
+	return prompt_ds
 
 
 def get_img_gen_pipe(model_id: str) -> Tuple[Any, Any]:
@@ -47,9 +57,6 @@ def get_img_gen_pipe(model_id: str) -> Tuple[Any, Any]:
 			return partial(ensemble_pipe, base=base, refiner=refiner)
 	else:
 		raise ValueError("model not supported")
-
-
-
 
 
 def get_sdxl_components():
