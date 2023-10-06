@@ -43,8 +43,7 @@ def save_image(image_output: Any, save_path: Path) -> None:
 	if isinstance(image_output, torch.Tensor):
 		image = image_output[0]
 	if isinstance(image_output, dict):
-		print(image_output.items())
-		image = image_output['image']
+		image = image_output['images'][0]
 	image.save(save_path)
 
 
