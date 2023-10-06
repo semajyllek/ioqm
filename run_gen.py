@@ -31,10 +31,20 @@ def run_gen(
 		
 	for prompt in prompt_ds:
 		icl_prompt = prompt['text'] + icl_suffix                     # add " on a table." to prompt
-		image = img_gen_pipe(icl_prompt)
-		print(image.__dict__)
+		image_output = img_gen_pipe(icl_prompt)
 		save_path = img_folder / f"{'_'.join(prompt['text'].split())}.png"
-		image[0].save(save_path) # ex. 1_microwave_and_3_fire_hydrants_and_2_handbags.png
+		save_image(image_output, save_path) # ex. 1_microwave_and_3_fire_hydrants_and_2_handbags.png
+
+
+def save_image(image_output: Any, save_path: Path) -> None:
+	"""
+	desc: save image to file, handle different pipline outputs
+	"""
+	if isinstance(image_output, torch.Tensor):
+		image = image_output[0]
+	if isinstance(image_output, dict):
+		image = image_output['image']
+	image.save(save_path)
 
 
 def get_img_folder(save_folder, model_name) -> Path:
