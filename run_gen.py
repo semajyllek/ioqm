@@ -47,11 +47,14 @@ def get_selected_prompt_dataset(prompt_ds: Optional[Dataset] = None, prompt_rang
 	return prompt_ds
 
 
-def get_img_gen_pipe(model_id: str) -> Tuple[Any, Any]:
+def get_img_gen_pipe(model_id: str) -> Any:
+	"""
+	returns: an image generation pipeline
+	"""
 	if model_id == "runwayml/stable-diffusion-v1-5":
 			pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16)
 			pipe = pipe.to("cuda")
-			return pipe()
+			return pipe
 	elif model_id == "stabilityai/stable-diffusion-xl-refiner-1.0":
 			base, refiner = get_sdxl_components()
 			return partial(ensemble_pipe, base=base, refiner=refiner)
