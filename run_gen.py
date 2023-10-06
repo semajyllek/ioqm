@@ -27,15 +27,23 @@ def run_gen(
 	prompt_ds = get_selected_prompt_dataset(prompt_ds, prompt_range) # load dataset of prompts
 	img_gen_pipe = get_img_gen_pipe(model_id)                        # load image generation pipeline
 	model_name = model_id.split('/')[-1]           	                 # get model name from model_id
-	
-	if not os.path.isdir(f"{save_path}{model_name}_images"):
-		os.mkdir(f"{save_path}{model_name}_images")
+	img_folder = get_img_folder(save_path, model_name)
 		
 	for prompt in prompt_ds:
 		icl_prompt = prompt['text'] + icl_suffix                     # add " on a table." to prompt
 		image = img_gen_pipe(icl_prompt)
-		image.save(f"{save_path}{model_name}_images/{'_'.join(prompt['text'].split())}.png") # ex. 1_microwave_and_3_fire_hydrants_and_2_handbags.png
+		print(image.__dict__)
+		image.save(img_folder / f"{'_'.join(prompt['text'].split())}.png") # ex. 1_microwave_and_3_fire_hydrants_and_2_handbags.png
 
+
+def get_img_folder(save_path, model_name) -> Path:
+	"""
+	desc: get or create folder to save images in
+	"""
+	img_folder = Path(f"{save_path}{model_name}_images")
+	if not os.path.isdir(img_folder):
+		os.mkdir(img_folder)
+	return img_folder
 
 def get_selected_prompt_dataset(prompt_ds: Optional[Dataset] = None, prompt_range: Optional[Tuple[int, int]] = None) -> Dataset:
 	if prompt_ds is None:
