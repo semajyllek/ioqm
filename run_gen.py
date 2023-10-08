@@ -44,6 +44,8 @@ def save_image(image_output: Any, save_path: Path) -> None:
 		image = image_output[0]
 	if isinstance(image_output, dict):
 		image = image_output['images'][0]
+	else:
+		image = image_output
 	image.save(save_path)
 
 
