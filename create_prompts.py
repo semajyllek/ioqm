@@ -5,18 +5,20 @@ from typing import List
 import random
 
 SAVE_PATH = "prompts.txt"
-MINI_SAVE_PATH = "mini_prompts2.txt"
+MINI_SAVE_PATH = "mini_prompts.txt"
+MINI_SAVE_PATH_V2 = "mini_prompts_v2.txt"
 
 # COCO Classes, from https://docs.ultralytics.com/datasets/detect/coco/#dataset-yaml
 OBJECT_PATH = Path(__file__).parent / "coco_classes.txt"
+V2_OBJECT_PATH = Path(__file__).parent / "coco_classes_v2.txt"  # minus 10 random objects from v1
 
-MAX_IMG_OBJECTS = 3
-MAX_OBJ_QUANTITY = 5
+MAX_IMG_OBJECTS = 2
+MAX_OBJ_QUANTITY = 3
 
 
 
-def get_objects() -> List[str]:
-    with open(OBJECT_PATH) as f:
+def get_objects(object_path: Path = OBJECT_PATH) -> List[str]:
+    with open(object_path, 'r') as f:
         objects = [o.strip('\n') for o in f.readlines()]
     return objects
 
@@ -99,13 +101,13 @@ def save_prompts(prompts: List[str], save_path: str = SAVE_PATH):
     
 
 if __name__ == "__main__":
-    objects = get_objects()
-    prompts = generate_prompts(objects)
-    save_prompts(prompts)
+    objects = get_objects(V2_OBJECT_PATH)
+    # prompts = generate_prompts(objects)
+    # save_prompts(prompts)
 
-    # mini_objects = random.sample(objects, 10)
-    # prompts = generate_prompts(mini_objects)
-    # save_prompts(prompts, MINI_SAVE_PATH)
+    mini_objects = random.sample(objects, 30)
+    prompts = generate_prompts(mini_objects)
+    save_prompts(prompts, MINI_SAVE_PATH_V2)
 
 
 

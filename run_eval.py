@@ -16,7 +16,32 @@ import json
 import os
 
 
-WORKER_DIVISOR = 4
+WORKER_DIVISOR = 2
+
+
+
+def run_eval(img_folder: str, detector: Optional[Any] = None, mp: bool = False) -> Tuple[Dict[str, float], Dict[str, float]]:
+    ioqms = dict(dict())
+    if detector is None:
+        detector = pipeline("object-detection", model="facebook/detr-resnet-50")
+
+    image_files = [os.path.join(img_folder, img_file) for img_file in os.listdir(img_folder)]
+    image_files = image_files[15000:] # TODO: remove this line
+
+    # Create a partial function with fixed detector argument for mapping
+    evaluate_single_image_partial = partial(evaluate_single_image, detector=detector)
+
+    if mp:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=os.cpu_count() // WORKER_DIVISOR) as executor:
+            results = executor.map(evaluate_single_image_partial, image_files)
+    else:
+       results = map(evaluate_single_image_partial, image_files)
+
+    for prompt, ioqm_result in results:
+        ioqms[prompt] = ioqm_result
+
+    return ioqms
+
 
 def evaluate_single_image(img_path: str, detector: Any) -> Dict[str, float]:
     detected_quants = get_obj_quants(detector(img_path))
@@ -26,27 +51,6 @@ def evaluate_single_image(img_path: str, detector: Any) -> Dict[str, float]:
     s_ioqm = soft_ioqm(expected_quants, detected_quants)
     ioqm_result = {'hard_ioqm': h_ioqm, 'soft_ioqm': s_ioqm}
     return prompt, ioqm_result
-
-def evaluate(img_folder: str, detector: Optional[Any] = None, mp: bool = False) -> Tuple[Dict[str, float], Dict[str, float]]:
-    ioqms = dict(dict())
-    if detector is None:
-        detector = pipeline("object-detection", model="facebook/detr-resnet-50")
-
-    image_files = [os.path.join(img_folder, img_file) for img_file in os.listdir(img_folder)]
-    
-    # Create a partial function with fixed detector argument for mapping
-    evaluate_single_image_partial = partial(evaluate_single_image, detector=detector)
-
-    if mp:
-        with concurrent.futures.ThreadPoolExecutor(max_workers=os.cpu_count() // WORKER_DIVISOR) as executor:
-            results = executor.map(evaluate_single_image_partial, image_files)
-    else:
-       results = executor.map(evaluate_single_image_partial, image_files)
-
-    for prompt, ioqm_result in results:
-        ioqms[prompt] = ioqm_result
-
-    return ioqms
 
 
 
@@ -112,8 +116,22 @@ def soft_ioqm(expected_obs: Dict[str, int], detected_obs: Dict[str, int]) -> flo
     return ioqm / num_exp_objects
 
 
-def save_scores_jsonl(ioqm_scores: Dict[str, Dict[str, float]], save_path: Path) -> None:
-  with open(save_path, 'w') as fp:
-    for p, scores in ioqm_scores.items():
+def save_scores_jsonl(ioqm_scores: Dict[str, Dict[str, float]], save_path: Path, mode: str = 'w') -> None:
+  with open(save_path, mode=mode) as fp:
+    for p, scores in sorted(ioqm_scores.items(), key=lambda x: x[0]):
       json.dump({p: scores}, fp)
       fp.write('\n')
+
+
+if __name__ == "__main__":
+  import argparse
+  parser = argparse.ArgumentParser()
+  parser.add_argument("--img_folder", type=str)
+  parser.add_argument("--save_path", type=str)
+  args = parser.parse_args()
+  scores = run_eval(args.img_folder, mp=True)
+  save_scores_jsonl(scores, args.save_path, mode='a')
+
+  # img_folder = "/Users/jameskelly/Downloads/stable-diffusion-xl-refiner-1.0_images"
+  # save_path = "/Users/jameskelly/Downloads/stable-diffusion-xl-refiner-1.0_ioqm_scores.jsonl"
+

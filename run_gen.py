@@ -20,14 +20,14 @@ def run_gen(
 		model_id: str, 
 		prompt_range: Optional[Tuple[int, int]] = None, 
 		icl_suffix: str = " on a table.", 
-		save_folder: str = "",
+		save_root: str = "",
 		prompt_ds: Optional[Dataset] = None
 ):
 	
 	prompt_ds = get_selected_prompt_dataset(prompt_ds, prompt_range) # load dataset of prompts
 	img_gen_pipe = get_img_gen_pipe(model_id)                        # load image generation pipeline
 	model_name = model_id.split('/')[-1]           	                 # get model name from model_id
-	img_folder = get_img_folder(save_folder, model_name)
+	img_folder = get_img_folder(save_root, model_name)
 		
 	for prompt in prompt_ds:
 		icl_prompt = prompt['text'] + icl_suffix                     # add " on a table." to prompt
