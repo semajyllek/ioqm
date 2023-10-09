@@ -14,6 +14,7 @@ V2_OBJECT_PATH = Path(__file__).parent / "coco_classes_v2.txt"  # minus 10 rando
 
 MAX_IMG_OBJECTS = 2
 MAX_OBJ_QUANTITY = 3
+NUM_OBJECT_CLASSES = 30 # 10 for v1, 30 for v2
 
 
 
@@ -61,7 +62,7 @@ def gen_single_object_prompts(objects: List[str]) -> List[str]:
         prompts.extend(gen_prompt_quantifier_helper(obj))
     return prompts  
 
-def generate_prompts(objects):
+def generate_prompts(objects, max_img_objects=MAX_IMG_OBJECTS, max_obj_quantity=MAX_OBJ_QUANTITY):
     """
     Generates a list of prompts and saves them for model evaluation
     e.g. 
@@ -77,9 +78,9 @@ def generate_prompts(objects):
         ...
     """
     prompts = []
-    for num_img_objects in range(1, MAX_IMG_OBJECTS + 1):
+    for num_img_objects in range(1, max_img_objects + 1):
         for combo in combinations(objects, num_img_objects):
-            for count_permute in product(range(1, MAX_OBJ_QUANTITY + 1), repeat=num_img_objects):
+            for count_permute in product(range(1, max_obj_quantity + 1), repeat=num_img_objects):
                 prompt = ""
                 for i, obj in enumerate(combo):
                     if i > 0:
@@ -101,12 +102,20 @@ def save_prompts(prompts: List[str], save_path: str = SAVE_PATH):
     
 
 if __name__ == "__main__":
-    objects = get_objects(V2_OBJECT_PATH)
-    # prompts = generate_prompts(objects)
-    # save_prompts(prompts)
 
-    mini_objects = random.sample(objects, 30)
-    prompts = generate_prompts(mini_objects)
+    import argparse 
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--mini", action="store_true")
+    parser.add_argument("--n_objects", type=int, default=NUM_OBJECT_CLASSES)
+    parser.add_argument("--max_objects", type=int, default=MAX_IMG_OBJECTS)
+    parser.add_argument("--max_quantity", type=int, default=MAX_OBJ_QUANTITY)
+    args = parser.parse_args()
+
+    objects = get_objects(OBJECT_PATH)
+    if args.mini:
+        objects = random.sample(objects, args.n_objects)
+
+    prompts = generate_prompts(objects, args.max_objects, args.max_quantity)
     save_prompts(prompts, MINI_SAVE_PATH_V2)
 
 
