@@ -8,6 +8,7 @@ from typing import Any, Optional, Tuple
 
 from diffusers import DiffusionPipeline, StableDiffusionPipeline
 from datasets import load_dataset, Dataset
+from transformers import pipeline
 
 from functools import partial
 
@@ -79,6 +80,8 @@ def get_img_gen_pipe(model_id: str) -> Any:
 	elif model_id == "stabilityai/stable-diffusion-xl-refiner-1.0":
 			base, refiner = get_sdxl_components()
 			return partial(ensemble_pipe, base=base, refiner=refiner)
+	elif model_id == "dalle-mini/dalle-mini":
+			return pipeline("text-to-image", model=model_id)
 	else:
 		raise ValueError("model not supported")
 
