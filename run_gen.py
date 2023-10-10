@@ -8,7 +8,6 @@ from typing import Any, Optional, Tuple
 
 from diffusers import DiffusionPipeline, StableDiffusionPipeline
 from datasets import load_dataset, Dataset
-from transformers import pipeline
 
 from functools import partial
 
@@ -80,8 +79,16 @@ def get_img_gen_pipe(model_id: str) -> Any:
 	elif model_id == "stabilityai/stable-diffusion-xl-refiner-1.0":
 			base, refiner = get_sdxl_components()
 			return partial(ensemble_pipe, base=base, refiner=refiner)
-	elif model_id == "dalle-mini/dalle-mini":
-			return pipeline("text-to-image", model=model_id)
+	elif model_id == "warp-ai/wuerstchen":
+		pipe = DiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16).to("cuda")
+		return partial(
+			pipe,
+			height=1024,
+			width=1024,
+			prior_guidance_scale=4.0,
+			decoder_guidance_scale=0.0,
+		)
+		
 	else:
 		raise ValueError("model not supported")
 
