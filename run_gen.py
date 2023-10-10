@@ -87,7 +87,7 @@ def get_img_gen_pipe(model_id: str) -> Any:
 			pipe,
 			height=1024,
 			width=1024,
-			prior_guidance_scale=4.0,
+			prior_guidance_scale=9.0,
 			decoder_guidance_scale=0.0,
 		)
 		
