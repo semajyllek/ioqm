@@ -81,7 +81,7 @@ def get_img_gen_pipe(model_id: str) -> Any:
 		base, refiner = get_sdxl_components()
 		return partial(ensemble_pipe, base=base, refiner=refiner)
 	
-	elif model_id == "warp-ai/wuerstchen":
+	elif model_id == "warp-diffusion/wuerstchen":
 		pipe = AutoPipelineForText2Image.from_pretrained(model_id, torch_dtype=torch.float16).to("cuda")
 		return partial(
 			pipe,
