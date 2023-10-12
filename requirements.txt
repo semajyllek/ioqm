@@ -5,3 +5,4 @@ datasets
 timm
 invisible_watermark 
 safetensors
+textblob

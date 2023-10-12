@@ -1,5 +1,6 @@
 
 from itertools import combinations, product
+from textblob import TextBlob
 from pathlib import Path
 from typing import List
 import random
@@ -22,35 +23,15 @@ def get_objects(object_path: Path = OBJECT_PATH) -> List[str]:
     with open(object_path, 'r') as f:
         objects = [o.strip('\n') for o in f.readlines()]
     return objects
-
-
-def get_plural_suffix(object: str) -> str:
-    suffix = ""
-    if object == "person":
-        object = "people"
-
-    elif object.endswith("s") or object.endswith("sh") or object.endswith("ch"):
-        suffix = "es"
-
-    elif object.endswith("y"):
-        suffix = "ies"
-        object = object[:-1]
-            
-    else:
-        suffix = "s"
-    
-    object += suffix
-    return object
-
     
 
 def gen_prompt_quantifier_helper(object: str, n: int) -> str:
     """
     object:  str, ex: 'person', 'car', 'dog', etc.
-    returns: list of object strings with quantifier prefix and pluralization
+    returns: pluralized object with quantity, ex: '1 person', '2 people', '3 people', etc.
     """
     if n > 1:
-        object = get_plural_suffix(object)
+        object = TextBlob(object).words.pluralize().pop() # dog -> dogs, person -> people, etc.
         
     return f"{n} {object}"
 
@@ -62,9 +43,9 @@ def gen_single_object_prompts(objects: List[str]) -> List[str]:
         prompts.extend(gen_prompt_quantifier_helper(obj))
     return prompts  
 
-def generate_prompts(objects, max_img_objects=MAX_IMG_OBJECTS, max_obj_quantity=MAX_OBJ_QUANTITY):
+def generate_prompts(objects: List[str], max_img_objects: int, max_obj_quantity: int, joiner: str):
     """
-    Generates a list of prompts and saves them for model evaluation
+    desc: Generates list of all possible prompt combinations and saves them for model evaluation
     e.g. 
         1 person
         2 people
@@ -76,6 +57,13 @@ def generate_prompts(objects, max_img_objects=MAX_IMG_OBJECTS, max_obj_quantity=
         2 people and 2 cars
         3 people and 2 cars
         ...
+
+    objects: list of str objects to generate prompts for
+    max_img_objects: max number of objects in an image
+    max_obj_quantity: max quantity of an object in an image
+    joiner: str, ex: ",", "and", "with", "holding", etc.
+
+    returns: list of prompt strings
     """
     prompts = []
     for num_img_objects in range(1, max_img_objects + 1):
@@ -84,13 +72,12 @@ def generate_prompts(objects, max_img_objects=MAX_IMG_OBJECTS, max_obj_quantity=
                 prompt = ""
                 for i, obj in enumerate(combo):
                     if i > 0:
-                        prompt += " and "
+                        prompt += f" {joiner} " if (joiner != ",") else ", "
                     prompt += gen_prompt_quantifier_helper(obj, count_permute[i])
 
                 prompts.append(prompt)
                 
     return prompts
-
 
 def save_prompts(prompts: List[str], save_path: str = SAVE_PATH):
     with open(save_path, 'w') as f:
@@ -109,14 +96,18 @@ if __name__ == "__main__":
     parser.add_argument("--n_objects", type=int, default=NUM_OBJECT_CLASSES)
     parser.add_argument("--max_objects", type=int, default=MAX_IMG_OBJECTS)
     parser.add_argument("--max_quantity", type=int, default=MAX_OBJ_QUANTITY)
+    parser.add_argument("--save_path", type=str, default=MINI_SAVE_PATH_V2)
+    parser.add_argument("--joiner", type=str, default="and")
     args = parser.parse_args()
 
     objects = get_objects(OBJECT_PATH)
     if args.mini:
         objects = random.sample(objects, args.n_objects)
 
-    prompts = generate_prompts(objects, args.max_objects, args.max_quantity)
-    save_prompts(prompts, MINI_SAVE_PATH_V2)
+    objects = ['sheep', 'potted plant', 'ski', 'orange', 'kite']
+
+    prompts = generate_prompts(objects, args.max_objects, args.max_quantity, args.joiner)
+    save_prompts(prompts, args.save_path)
 
 
 

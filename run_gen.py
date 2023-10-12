@@ -13,13 +13,14 @@ from functools import partial
 
 from pathlib import Path
 import torch
+import re
 import os
 
 
 def run_gen(
 		model_id: str, 
 		prompt_range: Optional[Tuple[int, int]] = None, 
-		icl_suffix: str = " on a table.", 
+		icl: str = "PROMPT on a table.", 
 		save_root: str = "",
 		prompt_ds: Optional[Dataset] = None
 ):
@@ -30,7 +31,7 @@ def run_gen(
 	img_folder = get_img_folder(save_root, model_name)
 		
 	for prompt in prompt_ds:
-		icl_prompt = prompt['text'] + icl_suffix                     # add " on a table." to prompt
+		icl_prompt = re.sub('PROMPT', prompt['text'], icl)                    # sub prompt into context e.g. re.sub("PROMPT", "1 apple", "PROMPT on a table") ->  "1 apple on a table."
 		image_output = img_gen_pipe(icl_prompt)
 		save_path = img_folder / f"{'_'.join(prompt['text'].split())}.png"
 		save_image(image_output, save_path) # ex. 1_microwave_and_3_fire_hydrants_and_2_handbags.png
@@ -49,11 +50,11 @@ def save_image(image_output: Any, save_path: Path) -> None:
 	image.save(save_path)
 
 
-def get_img_folder(save_folder, model_name) -> Path:
+def get_img_folder(save_root, model_name) -> Path:
 	"""
 	desc: get or create folder to save images in
 	"""
-	img_folder = Path(f"{save_folder}{model_name}_images")
+	img_folder = Path(f"{save_root}{model_name}_images")
 	if not os.path.isdir(img_folder):
 		os.mkdir(img_folder)
 	return img_folder
