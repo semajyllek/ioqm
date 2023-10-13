@@ -6,3 +6,5 @@ timm
 invisible_watermark 
 safetensors
 textblob
+ultralytics==8.0.28
+sahi==0.11.11

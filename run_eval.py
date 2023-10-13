@@ -19,14 +19,10 @@ import os
 WORKER_DIVISOR = 2
 
 
-
-def run_eval(img_folder: str, detector: Optional[Any] = None, mp: bool = False) -> Tuple[Dict[str, float], Dict[str, float]]:
+def run_eval(img_folder: str, detector_model_id: Optional[Any] = None, mp: bool = False) -> Tuple[Dict[str, float], Dict[str, float]]:
     ioqms = dict(dict())
-    if detector is None:
-        detector = pipeline("object-detection", model="facebook/detr-resnet-50")
-
+    detector = get_detector(detector_model_id)
     image_files = [os.path.join(img_folder, img_file) for img_file in os.listdir(img_folder)]
-    image_files = image_files[15000:] # TODO: remove this line
 
     # Create a partial function with fixed detector argument for mapping
     evaluate_single_image_partial = partial(evaluate_single_image, detector=detector)
@@ -43,6 +39,24 @@ def run_eval(img_folder: str, detector: Optional[Any] = None, mp: bool = False) 
     return ioqms
 
 
+
+def get_detector(model_id: Optional[str] = None) -> Any:
+    if model_id is None or (model_id == "facebook/detr-resnet-50"):
+        return pipeline("object-detection", model="facebook/detr-resnet-50")
+    elif model_id == "facebook/detr-resnet-101":
+        return pipeline("object-detection", model="facebook/detr-resnet-101")
+    elif model_id == "facebook/detr-resnet-50-panoptic":
+        return pipeline("object-detection", model="facebook/detr-resnet-50-panoptic")
+    elif model_id == 'jozhang97/deta-swin-large':
+        from detector_models.swin import swin_detector
+        return swin_detector
+    elif model_id == 'yolo':
+        from detector_models.yolov8 import yolov8_detector
+        return yolov8_detector
+    else:
+        raise ValueError(f"Invalid detector model_id: {model_id}")
+
+
 def evaluate_single_image(img_path: str, detector: Any) -> Dict[str, float]:
     detected_quants = get_obj_quants(detector(img_path))
     prompt = ' '.join(Path(img_path).stem.split('_'))
@@ -55,11 +69,11 @@ def evaluate_single_image(img_path: str, detector: Any) -> Dict[str, float]:
 
 
 def get_obj_quants(result: List[Dict[str, float]]) -> Dict[str, float]:
-  obj_quants = dict()
-  for res in result:
-    obj_quants[res['label']] = obj_quants.get(res['label'], 0) + 1
-
-  return obj_quants
+    obj_quants = dict()
+    for res in result:
+        obj_quants[res['label']] = obj_quants.get(res['label'], 0) + 1
+    
+    return obj_quants
     
 
 
@@ -117,21 +131,27 @@ def soft_ioqm(expected_obs: Dict[str, int], detected_obs: Dict[str, int]) -> flo
 
 
 def save_scores_jsonl(ioqm_scores: Dict[str, Dict[str, float]], save_path: Path, mode: str = 'w') -> None:
-  with open(save_path, mode=mode) as fp:
-    for p, scores in sorted(ioqm_scores.items(), key=lambda x: x[0]):
-      json.dump({p: scores}, fp)
-      fp.write('\n')
+    with open(save_path, mode=mode) as fp:
+        for p, scores in sorted(ioqm_scores.items(), key=lambda x: x[0]):
+            json.dump({p: scores}, fp)
+            fp.write('\n')
+
+
+
+
 
 
 if __name__ == "__main__":
-  import argparse
-  parser = argparse.ArgumentParser()
-  parser.add_argument("--img_folder", type=str)
-  parser.add_argument("--save_path", type=str)
-  args = parser.parse_args()
-  scores = run_eval(args.img_folder, mp=True)
-  save_scores_jsonl(scores, args.save_path, mode='a')
-
-  # img_folder = "/Users/jameskelly/Downloads/stable-diffusion-xl-refiner-1.0_images"
-  # save_path = "/Users/jameskelly/Downloads/stable-diffusion-xl-refiner-1.0_ioqm_scores.jsonl"
+   import argparse
+   parser = argparse.ArgumentParser()
+   parser.add_argument("--img_folder", type=str)
+   parser.add_argument("--detector_model_id", type=str, default=None)
+   parser.add_argument("--save_path", type=str)
+   args = parser.parse_args()
+   
+   scores = run_eval(args.img_folder, mp=True)
+   save_scores_jsonl(scores, args.save_path, mode='a')
+   
+   # img_folder = "/Users/jameskelly/Downloads/stable-diffusion-xl-refiner-1.0_images"
+   # save_path = "/Users/jameskelly/Downloads/stable-diffusion-xl-refiner-1.0_ioqm_scores.jsonl"
 
