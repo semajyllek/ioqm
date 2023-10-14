@@ -133,7 +133,7 @@ def soft_ioqm(expected_obs: Dict[str, int], detected_obs: Dict[str, int]) -> flo
         if det_obj is None:
             continue
         ioqm += detected_obs[det_obj] / float(exp_quant)
-    return max(1.0, ioqm / num_exp_objects)
+    return min(1.0, ioqm / num_exp_objects)
 
 
 def save_scores_jsonl(ioqm_scores: Dict[str, Dict[str, float]], save_path: Path, mode: str = 'w') -> None:
