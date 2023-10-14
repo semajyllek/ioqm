@@ -57,7 +57,7 @@ def get_detector(model_id: Optional[str] = None) -> Any:
         raise ValueError(f"Invalid detector model_id: {model_id}")
 
 
-def evaluate_single_image(img_path: Path, detector: Any) -> Tuple[str, Dict[str, float]]:
+def evaluate_single_image(img_path: Path, detector: Any, ) -> Tuple[str, Dict[str, float]]:
     detected_quants = get_obj_quants(detector(img_path))
     return get_prompt_and_scores(img_path, detected_quants)
 
@@ -74,8 +74,11 @@ def get_prompt_and_scores(img_path: Path, detected_quants: Dict[str, int]) -> Tu
 def get_obj_quants(result: List[Dict[str, float]]) -> Dict[str, float]:
     obj_quants = dict()
     for res in result:
-        obj_quants[res['label']] = obj_quants.get(res['label'], 0) + 1
-    
+        try:
+            obj_quants[res['label']] = obj_quants.get(res['label'], 0) + 1
+        except KeyError:
+            obj_quants[res.category.name] = obj_quants.get(res.category.name, 0) + 1
+
     return obj_quants
     
 

@@ -5,9 +5,11 @@ from sahi.predict import ObjectPrediction
 import numpy as np
 import PIL.Image
 
+THRESHOLD = 0.5
+
 model_yolo = YOLO('yolov8x.pt')
 
-def yolov8_detector(image_path: str, threshold: float) -> np.ndarray:
+def yolov8_detector(image_path: str, threshold: float = THRESHOLD) -> np.ndarray:
     image = PIL.Image.open(image_path)
     results = model_yolo(image, imgsz=640, conf=threshold)
     boxes = results[0].boxes.cpu().numpy().data
