@@ -39,7 +39,6 @@ def run_eval(img_folder: str, detector_model_id: Optional[Any] = None, mp: bool 
     return ioqms
 
 
-
 def get_detector(model_id: Optional[str] = None) -> Any:
     if model_id is None or (model_id == "facebook/detr-resnet-50"):
         return pipeline("object-detection", model="facebook/detr-resnet-50")
@@ -74,9 +73,9 @@ def get_prompt_and_scores(img_path: Path, detected_quants: Dict[str, int]) -> Tu
 def get_obj_quants(result: List[Dict[str, float]]) -> Dict[str, float]:
     obj_quants = dict()
     for res in result:
-        try:
+        if isinstance(res, dict):
             obj_quants[res['label']] = obj_quants.get(res['label'], 0) + 1
-        except KeyError:
+        else:
             obj_quants[res.category.name] = obj_quants.get(res.category.name, 0) + 1
 
     return obj_quants
