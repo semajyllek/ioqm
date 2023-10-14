@@ -16,7 +16,7 @@ import json
 import os
 
 
-WORKER_DIVISOR = 2
+WORKER_DIVISOR = 4
 
 
 def run_eval(img_folder: str, detector_model_id: Optional[Any] = None, mp: bool = False) -> Tuple[Dict[str, float], Dict[str, float]]:
@@ -57,15 +57,18 @@ def get_detector(model_id: Optional[str] = None) -> Any:
         raise ValueError(f"Invalid detector model_id: {model_id}")
 
 
-def evaluate_single_image(img_path: str, detector: Any) -> Dict[str, float]:
+def evaluate_single_image(img_path: Path, detector: Any) -> Tuple[str, Dict[str, float]]:
     detected_quants = get_obj_quants(detector(img_path))
-    prompt = ' '.join(Path(img_path).stem.split('_'))
+    return get_prompt_and_scores(img_path, detected_quants)
+
+
+def get_prompt_and_scores(img_path: Path, detected_quants: Dict[str, int]) -> Tuple[str, Dict[str, float]]:
+    prompt = Path(img_path).stem.replace('_', ' ')
     expected_quants = parse_objects_and_quantities(prompt)
     h_ioqm = hard_ioqm(expected_quants, detected_quants)
     s_ioqm = soft_ioqm(expected_quants, detected_quants)
     ioqm_result = {'hard_ioqm': h_ioqm, 'soft_ioqm': s_ioqm}
     return prompt, ioqm_result
-
 
 
 def get_obj_quants(result: List[Dict[str, float]]) -> Dict[str, float]:
