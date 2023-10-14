@@ -120,6 +120,9 @@ def soft_ioqm(expected_obs: Dict[str, int], detected_obs: Dict[str, int]) -> flo
         expected = dict_items([('skis', 1), ('snowboard', 3), ('backpack', 2)])
         detected = dict_items([('snowboards', 5), ('backpacks', 5), ('ties', 3)])
         soft_ioqm = 0/1 + 3/5 + 2/5 = 0.6 / 3 = 0.2
+
+        max is 1.0, so even if there are more detected objects than expected, 
+        the score is bound between 0 and 1.0
     """
     num_exp_objects = float(len(expected_obs)) 
     assert num_exp_objects > 0, "no expected objects" # avoids div by 0
@@ -130,7 +133,7 @@ def soft_ioqm(expected_obs: Dict[str, int], detected_obs: Dict[str, int]) -> flo
         if det_obj is None:
             continue
         ioqm += detected_obs[det_obj] / float(exp_quant)
-    return ioqm / num_exp_objects
+    return max(1.0, ioqm / num_exp_objects)
 
 
 def save_scores_jsonl(ioqm_scores: Dict[str, Dict[str, float]], save_path: Path, mode: str = 'w') -> None:
