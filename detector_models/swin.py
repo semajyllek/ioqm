@@ -17,7 +17,7 @@ deta_model.to(device)
 
 
 @torch.inference_mode()
-def swin_detector(image_path: str, threshold: float) -> np.ndarray:
+def swin_detector(image_path: str, threshold: float = THRESHOLD) -> np.ndarray:
     image = PIL.Image.open(image_path)
     inputs = image_processor(images=image, return_tensors='pt').to(device)
     outputs = deta_model(**inputs)
