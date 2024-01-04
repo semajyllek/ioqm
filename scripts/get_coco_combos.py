@@ -1,33 +1,35 @@
 
-from typing import Optional
+from typing import Optional, List, Set
 import numpy as np
 from pathlib import Path
+from itertools import combinations
 import os
 
+def add_label_combos(image_labels, label_combos):
+  for l1, l2 in combinations(image_labels, 2):
+    label_combos[l1, l2] += 1
+    label_combos[l2, l1] += 1
+  return label_combos
 
 def get_coco_combos(coco_label_folder: Path, save_path: Optional[Path] = None) -> np.ndarray:
-	label_combos = np.zeros((80, 80))
-	for label_file in os.listdir(coco_label_folder):
-		image_labels = []
-		with open(coco_label_folder / label_file, 'r') as f:
-			for line in f.readlines():
-				label = line.split(' ')[0]
-				image_labels.append(int(label))
-			
-		for i in range(len(image_labels)):
-			for j in range(i + 1, len(image_labels)):
-				label_combos[image_labels[i]][image_labels[j]] += 1
+    label_combos = np.zeros((80, 80))
+    for label_file in os.listdir(coco_label_folder):
+        image_labels: Set[int] = ()
+        with open(coco_label_folder / label_file, 'r') as f:
+            for line in f.readlines():
+                label = line.split(' ')[0]
+                image_labels.add(int(label))
+                
+    label_combos = add_label_combos(image_labels, label_combos)
 
-	if save_path is not None:
-		np.save(save_path, label_combos)
+    if save_path is not None:
+        np.save(save_path, label_combos)
 
-	return label_combos
+    return label_combos
 
 
 if __name__ == "__main__":
-	coco_label_folder = Path("/home/kevin/datasets/coco/labels/train2017")
-	save_path = Path("/home/kevin/datasets/coco/labels/train2017/label_combos.npy")
-	get_coco_combos(coco_label_folder, save_path)
-
-
+    coco_label_folder = Path("/content/drive/MyDrive/coco/labels/train2017")
+    save_path = Path("/content/drive/MyDrive/ioqm_data/label_combos.npy")
+    get_coco_combos(coco_label_folder, save_path)
 

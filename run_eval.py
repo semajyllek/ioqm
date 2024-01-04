@@ -155,11 +155,14 @@ if __name__ == "__main__":
    parser.add_argument("--img_folder", type=str)
    parser.add_argument("--detector_model_id", type=str, default=None)
    parser.add_argument("--save_path", type=str)
+   parser.add_argument("--mp", action="store_true")
    args = parser.parse_args()
    
-   scores = run_eval(args.img_folder, mp=True)
-   save_scores_jsonl(scores, args.save_path, mode='a')
+   scores = run_eval(args.img_folder, mp=args.mp, detector_model_id=args.detector_model_id)
+
+   print(scores)
+   save_scores_jsonl(scores, args.save_path, mode='w')
    
-   # img_folder = "/Users/jameskelly/Downloads/stable-diffusion-xl-refiner-1.0_images"
-   # save_path = "/Users/jameskelly/Downloads/stable-diffusion-xl-refiner-1.0_ioqm_scores.jsonl"
+   # img_folder = "/Users/jameskelly/Downloads/stable-diffusion-xl-refiner-1.0_images_v1"
+   # save_path = "/Users/jameskelly/Downloads/stable-diffusion-xl-refiner-1.0_v1_yolov5_ioqm_scores.jsonl"
 
