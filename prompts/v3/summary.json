@@ -72,5 +72,20 @@
       "4": 694,
       "3": 691
     }
+  },
+  "pilot": {
+    "n": 480,
+    "by_split": {
+      "test_ood_pair": 120,
+      "test_id": 120,
+      "test_single": 60,
+      "test_ood_count": 120,
+      "test_ood_triple": 60
+    },
+    "by_n_types": {
+      "2": 180,
+      "1": 60,
+      "3": 240
+    }
   }
 }

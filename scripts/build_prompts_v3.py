@@ -43,6 +43,8 @@ def main():
     ap.add_argument("--max_count", type=int, default=5)
     ap.add_argument("--eval_subset_size", type=int, default=3000)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--pilot_size", type=int, default=480,
+                    help="stratified sub-sample of the eval subset for best-of-N pilots (x16 seeds)")
     args = ap.parse_args()
 
     for c in args.pair_classes:
@@ -61,6 +63,8 @@ def main():
     save_specs(specs, out / "all.jsonl")
     save_specs([s for s in specs if s.split == "train"], out / "train.jsonl")
     save_specs(subset, out / "eval_subset.jsonl")
+    pilot = stratified_subset(subset, args.pilot_size, key=lambda s: (s.split, s.n_types), seed=args.seed)
+    save_specs(pilot, out / "pilot.jsonl")
 
     summary = {
         "pair_classes": args.pair_classes, "triple_classes": args.triple_classes,
@@ -72,6 +76,8 @@ def main():
                         "by_split": dict(Counter(s.split for s in subset)),
                         "by_n_types": dict(Counter(s.n_types for s in subset)),
                         "by_max_count": dict(Counter(s.max_count for s in subset))},
+        "pilot": {"n": len(pilot), "by_split": dict(Counter(s.split for s in pilot)),
+                  "by_n_types": dict(Counter(s.n_types for s in pilot))},
     }
     (out / "summary.json").write_text(json.dumps(summary, indent=2))
     print(json.dumps(summary, indent=2))

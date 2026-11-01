@@ -1,0 +1,480 @@
+{"prompt_id": "002c5f57df21", "objects": [["bus", 1], ["bowl", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "0087b5a679c2", "objects": [["bicycle", 2], ["dog", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "008c306e6172", "objects": [["dog", 3], ["apple", 4]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "00f44d046e46", "objects": [["bottle", 1], ["cup", 3]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "0106dab353b0", "objects": [["horse", 3]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "0111f30afe83", "objects": [["boat", 3], ["backpack", 3]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "0136e805ddd3", "objects": [["car", 5], ["boat", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "01b75ba5b993", "objects": [["person", 4], ["cup", 5], ["umbrella", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "02304b3e2eee", "objects": [["bicycle", 5], ["wine glass", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "0289618fc240", "objects": [["person", 1], ["car", 1], ["apple", 2]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "02c834c01d6b", "objects": [["dog", 5], ["teddy bear", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "031d027638cb", "objects": [["boat", 5], ["horse", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "040ae91d9a93", "objects": [["horse", 4], ["sheep", 5]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "0462ad99b3aa", "objects": [["bus", 5], ["clock", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "04ab991c9d9e", "objects": [["person", 5], ["sheep", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "04db0c8a9109", "objects": [["sheep", 1]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "050258bcc199", "objects": [["person", 2], ["apple", 1], ["teddy bear", 4]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "063f5215d1f7", "objects": [["banana", 3]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "06c489d0f051", "objects": [["horse", 1]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "0742f42235fa", "objects": [["chair", 5], ["teddy bear", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "07b0d8b8820c", "objects": [["suitcase", 4], ["potted plant", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "09461058d3b3", "objects": [["dog", 5], ["car", 5], ["apple", 4]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "0956156b5fed", "objects": [["car", 3], ["cup", 5], ["elephant", 1]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "0ab0fdc66c9c", "objects": [["person", 5], ["chair", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "0ab4a51ce894", "objects": [["person", 3], ["apple", 2], ["teddy bear", 5]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "0b9e306258b0", "objects": [["person", 3], ["car", 3], ["cup", 4]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "0c12e5f30b03", "objects": [["dog", 5], ["bottle", 4]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "0cb620f924bb", "objects": [["dog", 5], ["elephant", 3], ["teddy bear", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "0d9a91801706", "objects": [["umbrella", 5], ["wine glass", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "0da500c72c40", "objects": [["person", 3], ["umbrella", 2], ["teddy bear", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "0dae9de5a3be", "objects": [["boat", 5], ["teddy bear", 2]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "0e4d3b5af7f7", "objects": [["horse", 5]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "0fc89bffe230", "objects": [["dog", 2], ["bottle", 2]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "107e6fd55b52", "objects": [["car", 3], ["elephant", 1], ["teddy bear", 2]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "11201a728e11", "objects": [["apple", 5], ["elephant", 5], ["umbrella", 1]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "118deb4c0a52", "objects": [["boat", 3], ["umbrella", 4]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "119823441338", "objects": [["person", 5], ["elephant", 4], ["teddy bear", 5]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "119b341db510", "objects": [["apple", 3], ["elephant", 2], ["teddy bear", 5]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "13c48230209e", "objects": [["person", 2], ["apple", 4], ["teddy bear", 4]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "13e2b47cd53c", "objects": [["apple", 3], ["umbrella", 3], ["teddy bear", 3]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "13e9577aa6f4", "objects": [["dog", 1], ["cup", 3], ["umbrella", 2]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "14796253fa98", "objects": [["car", 5], ["teddy bear", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "1571d54e0610", "objects": [["bird", 1]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "1604a6d9ea7c", "objects": [["dog", 1], ["elephant", 2], ["umbrella", 2]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "16b407a54926", "objects": [["car", 2], ["cup", 1], ["elephant", 2]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "16b7e95194e2", "objects": [["person", 4], ["elephant", 4], ["teddy bear", 1]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "16fa53ad0874", "objects": [["person", 4], ["wine glass", 4]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "173a75739de6", "objects": [["car", 1], ["suitcase", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "176b54fba4af", "objects": [["person", 2], ["dog", 3], ["teddy bear", 5]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "17965fb9cd67", "objects": [["person", 3], ["car", 3], ["teddy bear", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "17c3af796a75", "objects": [["bus", 5], ["teddy bear", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "17e5588515dc", "objects": [["suitcase", 4]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "1940067549c8", "objects": [["apple", 3], ["elephant", 3], ["umbrella", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "19e06e9a80c0", "objects": [["car", 3], ["cup", 3], ["elephant", 1]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "1a1f8c25eb36", "objects": [["person", 4], ["cup", 4], ["apple", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "1a9afa75f8c0", "objects": [["bird", 3]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "1aa0151fb3b0", "objects": [["person", 5], ["umbrella", 3], ["teddy bear", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "1ab651ca76a6", "objects": [["umbrella", 4]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "1c557cd29fb9", "objects": [["person", 3], ["dog", 5], ["car", 3]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "1cf0136c6aba", "objects": [["person", 2], ["dog", 4], ["teddy bear", 1]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "1d2669648052", "objects": [["car", 5], ["cup", 4], ["teddy bear", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "1d38bdfceee1", "objects": [["bicycle", 2], ["umbrella", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "1dcce3072565", "objects": [["cup", 5], ["apple", 5], ["elephant", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "1dd62b1044da", "objects": [["suitcase", 3], ["banana", 3]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "1e4efe03b828", "objects": [["person", 5], ["bottle", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "1f18f2dd3eaa", "objects": [["person", 5], ["car", 1], ["apple", 5]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "1feced785f7d", "objects": [["suitcase", 2], ["bowl", 5]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "201fb3a54817", "objects": [["cat", 4], ["bird", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "2107a3242f64", "objects": [["person", 4], ["car", 5], ["teddy bear", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "239592010668", "objects": [["cat", 5], ["apple", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "23c4998ae7f7", "objects": [["dog", 2], ["car", 4], ["apple", 3]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "2435cc76b4e7", "objects": [["bus", 3], ["clock", 3]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "2479506f8703", "objects": [["person", 3], ["car", 4], ["teddy bear", 4]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "2529df4e8c12", "objects": [["horse", 3], ["teddy bear", 3]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "2590ff583496", "objects": [["person", 4], ["horse", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "2643c67bab25", "objects": [["person", 5], ["elephant", 3], ["umbrella", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "2687fe9de76a", "objects": [["person", 3], ["backpack", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "26c0e12c6861", "objects": [["car", 5], ["cup", 1], ["apple", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "26d6145a7334", "objects": [["banana", 4]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "2744ab63d519", "objects": [["cup", 5], ["apple", 5], ["umbrella", 1]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "2855f5f98cfa", "objects": [["car", 5], ["apple", 5], ["umbrella", 3]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "292f738a2efa", "objects": [["car", 2], ["apple", 3], ["teddy bear", 3]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "29f74a5cf50c", "objects": [["umbrella", 1]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "2a2ebfe1551b", "objects": [["person", 5], ["dog", 3], ["teddy bear", 1]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "2ade1c2c619b", "objects": [["person", 3], ["chair", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "2b2320539084", "objects": [["bicycle", 1], ["car", 4]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "2b8e82a3b452", "objects": [["apple", 2], ["clock", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "2be55dbbe051", "objects": [["umbrella", 2]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "2c1f7694c355", "objects": [["car", 5], ["umbrella", 4], ["teddy bear", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "2c26a57cd5d9", "objects": [["backpack", 2], ["cup", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "2c569a3070d9", "objects": [["boat", 2]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "2cb9a0730245", "objects": [["dog", 3], ["car", 5], ["teddy bear", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "2d381d3dd3f9", "objects": [["bicycle", 1], ["suitcase", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "2d4f5132bafd", "objects": [["car", 1], ["cup", 3], ["umbrella", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "2e385d19a1f8", "objects": [["banana", 5], ["clock", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "2ec8c6985870", "objects": [["person", 4], ["apple", 5], ["teddy bear", 4]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "2f312296e515", "objects": [["car", 5], ["potted plant", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "2f69c443816f", "objects": [["person", 3], ["elephant", 3], ["teddy bear", 4]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "2fd14d48f5bb", "objects": [["car", 4], ["elephant", 5]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "306a9576b00a", "objects": [["car", 2], ["clock", 2]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "314a27ec4395", "objects": [["cup", 5], ["umbrella", 5], ["teddy bear", 1]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "31bd19579bd8", "objects": [["dog", 1], ["car", 1], ["umbrella", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "32ac1a4e3aad", "objects": [["wine glass", 5], ["banana", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "33f5e1d03b89", "objects": [["person", 1], ["dog", 5], ["cup", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "340be620e90b", "objects": [["cup", 5]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "345e56cc64fe", "objects": [["boat", 2], ["cup", 2]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "350526ffc46f", "objects": [["boat", 1], ["teddy bear", 3]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "354d8ad0d4a4", "objects": [["car", 5], ["cup", 4], ["elephant", 4]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "356d7508b86a", "objects": [["dog", 2], ["apple", 3], ["elephant", 2]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "35a459c0091e", "objects": [["horse", 2], ["teddy bear", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "36bb7bc97b27", "objects": [["person", 2], ["elephant", 4], ["teddy bear", 5]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "36bfa6523981", "objects": [["bicycle", 5]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "37b7846c1b1f", "objects": [["dog", 2], ["apple", 2], ["teddy bear", 4]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "384b50dda517", "objects": [["cup", 1], ["apple", 5], ["teddy bear", 2]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "3877356b5ee8", "objects": [["person", 1], ["car", 4], ["teddy bear", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "3928a5a04baa", "objects": [["person", 5], ["car", 1], ["cup", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "39a6cd0b2be0", "objects": [["car", 5], ["elephant", 3], ["umbrella", 4]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "3abd693d48c8", "objects": [["bird", 5], ["suitcase", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "3bee202f0426", "objects": [["car", 1], ["elephant", 5], ["teddy bear", 2]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "3bf1a2f517de", "objects": [["bus", 5], ["wine glass", 5]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "3c218ff2f50b", "objects": [["car", 5], ["cup", 2], ["elephant", 2]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "3c252dc07a09", "objects": [["person", 1], ["apple", 3], ["teddy bear", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "3c3570ec10f9", "objects": [["sheep", 3], ["chair", 2]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "3c4c3282d897", "objects": [["cup", 1], ["elephant", 3], ["teddy bear", 1]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "3d6b12af12b9", "objects": [["person", 3], ["apple", 1], ["umbrella", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "3da80e6e9752", "objects": [["car", 5], ["cup", 3], ["apple", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "3dce0aeccc23", "objects": [["person", 3], ["apple", 2], ["teddy bear", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "3e252a0ccc2b", "objects": [["clock", 3]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "3e4ee71f701d", "objects": [["apple", 5], ["teddy bear", 5]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "3f170d5a741f", "objects": [["cup", 4], ["teddy bear", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "3fbffa9beedf", "objects": [["car", 4], ["apple", 1], ["teddy bear", 3]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "4000552771cc", "objects": [["boat", 3], ["bird", 5]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "40563fb143e3", "objects": [["sheep", 4]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "4126b75a87a2", "objects": [["backpack", 2], ["clock", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "418be33e3384", "objects": [["cup", 3], ["umbrella", 3], ["teddy bear", 5]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "41ca0b106241", "objects": [["cup", 5], ["umbrella", 5], ["teddy bear", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "41f4e4856571", "objects": [["potted plant", 1]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "43c066a185ba", "objects": [["bus", 3], ["wine glass", 3]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "43d8f9a5de2c", "objects": [["person", 2], ["apple", 3], ["teddy bear", 2]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "43eb3cfbb62e", "objects": [["dog", 2], ["apple", 2], ["elephant", 2]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "4451222f85c8", "objects": [["horse", 5], ["suitcase", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "446dcd8fe124", "objects": [["sheep", 3], ["elephant", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "45d5e2ae665a", "objects": [["backpack", 4]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "46048c2b0d3e", "objects": [["horse", 5], ["elephant", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "4611c4084328", "objects": [["person", 1], ["car", 5], ["umbrella", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "4658e8de8f16", "objects": [["apple", 2], ["umbrella", 4], ["teddy bear", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "47b5c61984a7", "objects": [["boat", 2], ["umbrella", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "48329dccb540", "objects": [["person", 3], ["car", 2], ["elephant", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "484b36ba480b", "objects": [["sheep", 5], ["chair", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "4865b46e04a5", "objects": [["bowl", 4], ["banana", 4]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "487416eefad3", "objects": [["boat", 5], ["cat", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "48ffd2ef2862", "objects": [["boat", 5], ["apple", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "49340f3f218e", "objects": [["car", 3], ["cup", 2], ["apple", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "4a3217486be6", "objects": [["person", 2], ["apple", 2], ["teddy bear", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "4a3e0a8af5d3", "objects": [["person", 5], ["apple", 1], ["umbrella", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "4a6cd48a5ba4", "objects": [["chair", 4]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "4b4fbba4492f", "objects": [["person", 5], ["dog", 4], ["car", 4]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "4b8840e27a8e", "objects": [["sheep", 1], ["backpack", 5]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "4df5777132a1", "objects": [["person", 5], ["dog", 4], ["elephant", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "4eee3b08f904", "objects": [["teddy bear", 3]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "50f1b58cf2e4", "objects": [["sheep", 2]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "51db85ef5fff", "objects": [["dog", 2], ["cup", 5], ["elephant", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "5218581fc601", "objects": [["dog", 3], ["car", 4], ["umbrella", 4]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "526a2ba2b28a", "objects": [["dog", 2], ["apple", 2], ["umbrella", 2]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "52d13a0b06b3", "objects": [["backpack", 1], ["potted plant", 2]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "52f6736388ac", "objects": [["cup", 3]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "5314a1c2c708", "objects": [["person", 5], ["clock", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "534c36f7b00d", "objects": [["person", 2], ["cup", 2], ["umbrella", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "539e4ad5fd4b", "objects": [["car", 4], ["apple", 5], ["umbrella", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "547047454a0c", "objects": [["person", 5], ["apple", 2], ["umbrella", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "56363491ab6f", "objects": [["horse", 2], ["sheep", 5]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "56ce54fa1ff6", "objects": [["dog", 5], ["car", 5], ["elephant", 3]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "57089cb8486b", "objects": [["person", 5], ["apple", 5], ["elephant", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "572457caeec6", "objects": [["car", 3], ["umbrella", 2], ["teddy bear", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "574d0f5fa46e", "objects": [["person", 1], ["car", 5], ["apple", 2]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "584f9ab19c30", "objects": [["wine glass", 3], ["potted plant", 4]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "588791d74192", "objects": [["person", 2], ["dog", 4], ["cup", 4]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "59e936d27ae4", "objects": [["person", 5], ["car", 1], ["elephant", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "5a6510bb7b8a", "objects": [["person", 1], ["dog", 5], ["teddy bear", 1]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "5d3cb3247ef6", "objects": [["dog", 5], ["elephant", 4], ["teddy bear", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "5e70bdf20a6b", "objects": [["car", 2], ["umbrella", 3], ["teddy bear", 4]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "5ee38688be46", "objects": [["dog", 5], ["cat", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "5f21447eff8e", "objects": [["potted plant", 5], ["clock", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "5f613ad27ff7", "objects": [["person", 5], ["cup", 5], ["elephant", 2]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "5fce50ee2abb", "objects": [["bottle", 3], ["potted plant", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "605e8b10aa4b", "objects": [["clock", 5]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "6126efa842d5", "objects": [["dog", 2], ["car", 3], ["apple", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "6177d2b9b8cc", "objects": [["person", 4], ["dog", 1], ["apple", 3]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "61fa67a0e2e7", "objects": [["car", 5], ["apple", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "6332c314dfc4", "objects": [["person", 4], ["dog", 4], ["car", 1]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "6367ac90fcc8", "objects": [["car", 2], ["cup", 5], ["elephant", 2]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "6382c9e53e00", "objects": [["bus", 5], ["elephant", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "643fa98682ca", "objects": [["suitcase", 1], ["apple", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "645487acb3b8", "objects": [["person", 3], ["car", 1], ["apple", 4]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "659291e28835", "objects": [["sheep", 3], ["bowl", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "65b4a1b7a254", "objects": [["bird", 5], ["banana", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "66d9460bb83e", "objects": [["cup", 2], ["apple", 2], ["umbrella", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "67918e9b5d50", "objects": [["person", 5], ["dog", 2], ["teddy bear", 2]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "680e566b738b", "objects": [["wine glass", 5], ["bowl", 2]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "6ac67b239763", "objects": [["person", 2], ["dog", 2], ["car", 3]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "6b2b91b09d87", "objects": [["car", 4]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "6b5e2fdf8917", "objects": [["cup", 3], ["umbrella", 5], ["teddy bear", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "6c3c6e1cac4a", "objects": [["person", 5], ["dog", 5], ["car", 2]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "6c943391a804", "objects": [["person", 1], ["cup", 3], ["elephant", 4]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "6d85511a496d", "objects": [["wine glass", 4], ["banana", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "6e133e7ee6c1", "objects": [["cup", 5], ["umbrella", 5], ["teddy bear", 4]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "6f11972abecc", "objects": [["person", 4], ["dog", 4], ["apple", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "7015734aa586", "objects": [["person", 3], ["dog", 3], ["car", 4]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "70207bb1b25b", "objects": [["backpack", 1], ["apple", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "715444c9b82b", "objects": [["car", 4], ["clock", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "71b9c692d01c", "objects": [["car", 3], ["banana", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "72abf51f4dcc", "objects": [["car", 3], ["elephant", 2], ["teddy bear", 3]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "734c61021c7a", "objects": [["person", 5], ["cup", 5], ["teddy bear", 3]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "738c043b4092", "objects": [["car", 5], ["apple", 3], ["elephant", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "739615dabacd", "objects": [["teddy bear", 5]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "74d06293bbc3", "objects": [["person", 5], ["dog", 2], ["cup", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "74d789a84084", "objects": [["potted plant", 2]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "755140a95f4f", "objects": [["boat", 3], ["elephant", 3]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "755d64a08388", "objects": [["umbrella", 2], ["wine glass", 5]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "760b10ff8e79", "objects": [["car", 3], ["apple", 1], ["elephant", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "7656b2613439", "objects": [["person", 1], ["sheep", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "76bd4af8e84f", "objects": [["dog", 5], ["elephant", 1], ["umbrella", 4]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "76c727defcab", "objects": [["bus", 5], ["horse", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "76ce849cb261", "objects": [["dog", 3], ["elephant", 4], ["umbrella", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "781cc8a5962d", "objects": [["person", 4], ["dog", 4], ["teddy bear", 5]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "781de534b1e2", "objects": [["bowl", 1]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "7841af85e9de", "objects": [["car", 5], ["elephant", 4], ["teddy bear", 2]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "7868f4378b24", "objects": [["dog", 4]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "78b844ad6950", "objects": [["dog", 5], ["suitcase", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "78f118dbe3a1", "objects": [["person", 1], ["dog", 1], ["teddy bear", 5]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "7b1d1498fb42", "objects": [["person", 5], ["car", 4], ["umbrella", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "7bea99520e1c", "objects": [["car", 2], ["elephant", 2], ["teddy bear", 2]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "7c29b41defc2", "objects": [["person", 4], ["dog", 1], ["umbrella", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "7c36c2eb20cd", "objects": [["bus", 4], ["clock", 2]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "7c6b64ea4e42", "objects": [["car", 1], ["cup", 5], ["umbrella", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "7c9942df70ce", "objects": [["person", 3], ["dog", 4], ["apple", 3]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "7d8f47107f3b", "objects": [["person", 2], ["elephant", 1], ["umbrella", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "7f7b1014b2a0", "objects": [["elephant", 5], ["clock", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "80009f57ca8a", "objects": [["cat", 1], ["horse", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "802cd5f1753f", "objects": [["dog", 1], ["cup", 2], ["apple", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "8178a16b555d", "objects": [["horse", 4], ["cup", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "81889283c198", "objects": [["person", 5], ["cup", 4], ["umbrella", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "81f1530f3ed0", "objects": [["bus", 2], ["cat", 5]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "82154984dc7a", "objects": [["suitcase", 5], ["clock", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "8253ecd79a76", "objects": [["person", 2], ["elephant", 3], ["teddy bear", 1]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "829a1c15e21a", "objects": [["cup", 1], ["apple", 1], ["teddy bear", 2]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "82b22bf5631c", "objects": [["cup", 5], ["apple", 5], ["umbrella", 4]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "839ff4449a02", "objects": [["car", 2], ["clock", 3]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "83b6055096ae", "objects": [["apple", 2]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "843a28b4f6d2", "objects": [["person", 3], ["dog", 1], ["car", 1]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "8469ebf14ba8", "objects": [["person", 1], ["cup", 4], ["teddy bear", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "847ba4dc7232", "objects": [["bicycle", 1]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "84b625ad8b0e", "objects": [["boat", 5], ["bowl", 4]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "84c885618ad3", "objects": [["car", 2], ["elephant", 2], ["teddy bear", 5]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "856fa4842ca8", "objects": [["elephant", 2], ["umbrella", 1], ["teddy bear", 4]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "858174810bc9", "objects": [["cup", 2], ["elephant", 1], ["umbrella", 1]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "863f638b11bf", "objects": [["chair", 3]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "86703dd47a10", "objects": [["bottle", 1], ["potted plant", 3]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "86bd4d0b572f", "objects": [["person", 5], ["car", 3], ["umbrella", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "86db828265a5", "objects": [["cat", 5], ["backpack", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "88250f0c218e", "objects": [["person", 5], ["cup", 3], ["elephant", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "889f0dc4fb32", "objects": [["car", 3], ["cup", 2], ["elephant", 1]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "8a57270778a9", "objects": [["backpack", 5], ["chair", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "8acb76992c9e", "objects": [["sheep", 2], ["backpack", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "8b0019b3df55", "objects": [["apple", 4], ["umbrella", 2], ["teddy bear", 4]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "8b6a115b61bf", "objects": [["bicycle", 4], ["dog", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "8c55769b88ab", "objects": [["car", 5], ["apple", 1], ["umbrella", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "8c895851fde6", "objects": [["car", 2], ["umbrella", 3], ["teddy bear", 5]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "8cba52a52b4b", "objects": [["dog", 3], ["apple", 3], ["elephant", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "8cfa99b7c893", "objects": [["person", 1], ["elephant", 4], ["teddy bear", 1]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "8d8a4f6980b0", "objects": [["dog", 5], ["apple", 5], ["umbrella", 3]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "8e7ffeafe895", "objects": [["car", 1], ["suitcase", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "8ed7fab80b06", "objects": [["person", 5], ["apple", 5], ["umbrella", 2]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "8f8cf43d1ef4", "objects": [["dog", 2], ["apple", 4], ["teddy bear", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "8fab41d2fd00", "objects": [["elephant", 2], ["umbrella", 1], ["teddy bear", 5]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "900402477996", "objects": [["boat", 1]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "902f690859ec", "objects": [["boat", 5], ["wine glass", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "90a20c1f0a93", "objects": [["dog", 3], ["umbrella", 2], ["teddy bear", 4]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "9136f02f765d", "objects": [["boat", 1], ["bottle", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "931e149f6d28", "objects": [["sheep", 1], ["bowl", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "937ccf81a1b9", "objects": [["bicycle", 2], ["boat", 4]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "939be085aa60", "objects": [["dog", 2], ["apple", 1], ["teddy bear", 2]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "94ffcbfdb8cd", "objects": [["person", 3], ["cup", 5], ["apple", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "953a6e2a2711", "objects": [["wine glass", 1], ["banana", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "95effa556857", "objects": [["dog", 3], ["car", 4], ["elephant", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "9613c2a3bb11", "objects": [["backpack", 1], ["potted plant", 3]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "961ea8af6fa4", "objects": [["person", 1], ["cup", 3], ["umbrella", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "967f9a83c1f8", "objects": [["suitcase", 5], ["bottle", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "974cdf2082bd", "objects": [["car", 4], ["elephant", 2], ["teddy bear", 4]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "97f0035b3612", "objects": [["person", 2], ["elephant", 4], ["teddy bear", 3]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "97f204f6a309", "objects": [["bus", 5], ["sheep", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "981cd3b5e605", "objects": [["suitcase", 1], ["bottle", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "985055a930e7", "objects": [["dog", 2], ["umbrella", 2], ["teddy bear", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "98aa59bc1225", "objects": [["car", 3], ["elephant", 1], ["teddy bear", 1]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "98cdd935caf9", "objects": [["umbrella", 5], ["apple", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "98db410c527b", "objects": [["person", 5], ["car", 5], ["teddy bear", 1]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "99ba858a78be", "objects": [["person", 3], ["car", 5], ["cup", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "9a254be3e145", "objects": [["dog", 1], ["car", 3], ["teddy bear", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "9b09c49f6a4e", "objects": [["person", 5], ["bus", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "9b0c4c6a8e42", "objects": [["person", 5], ["bicycle", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "9ceb515df23a", "objects": [["suitcase", 5], ["apple", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "9d11755860e9", "objects": [["elephant", 3]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "9d8a20e36361", "objects": [["boat", 5], ["backpack", 4]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "9e0313594fb8", "objects": [["car", 3], ["elephant", 1], ["teddy bear", 3]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "9e215412706b", "objects": [["person", 2], ["apple", 5], ["elephant", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "9ea017de5208", "objects": [["car", 5], ["umbrella", 5], ["teddy bear", 3]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "9f902fbb3977", "objects": [["backpack", 5]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "9fc9642cbf6e", "objects": [["banana", 5]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "a1dae8b2883e", "objects": [["person", 2], ["dog", 2], ["apple", 3]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "a2a781711864", "objects": [["bicycle", 2]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "a2c9e4c2242b", "objects": [["person", 5], ["car", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "a3c7703ae6fa", "objects": [["dog", 1], ["cup", 1], ["umbrella", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "a40fca1acc47", "objects": [["potted plant", 4]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "a46cf7c51e18", "objects": [["sheep", 4], ["backpack", 5]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "a46f305e6e40", "objects": [["bus", 3], ["potted plant", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "a4b8dbb39958", "objects": [["car", 5], ["wine glass", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "a5605571b10c", "objects": [["person", 5], ["umbrella", 2], ["teddy bear", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "a563429c2661", "objects": [["car", 2], ["banana", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "a572613c35e1", "objects": [["dog", 1], ["cup", 1], ["apple", 2]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "a5dcc165cdf5", "objects": [["dog", 5], ["apple", 4], ["teddy bear", 5]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "a6341334e991", "objects": [["dog", 5], ["sheep", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "a70c1b0ef43b", "objects": [["car", 4], ["cup", 1], ["teddy bear", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "a790a3325f76", "objects": [["car", 1], ["cup", 4], ["teddy bear", 4]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "a9c9166d474c", "objects": [["bicycle", 4]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "a9f1d2008ea5", "objects": [["boat", 2], ["clock", 2]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "aa4284ea1cac", "objects": [["dog", 1], ["apple", 2], ["elephant", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "aa7048864715", "objects": [["car", 3], ["apple", 1], ["elephant", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "ab1a58aee2c9", "objects": [["car", 3], ["apple", 2], ["umbrella", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "abbcd6ee6393", "objects": [["potted plant", 3]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "aca52253c7a0", "objects": [["potted plant", 5], ["teddy bear", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "acead6470860", "objects": [["person", 2], ["elephant", 2], ["teddy bear", 1]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "acf3b6022aef", "objects": [["dog", 3], ["cup", 3], ["elephant", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "ae0c53317b0e", "objects": [["banana", 1], ["chair", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "ae8edd0fddab", "objects": [["cup", 2], ["apple", 4]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "af024450897b", "objects": [["person", 4], ["car", 2], ["elephant", 4]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "af13f8c4daa0", "objects": [["suitcase", 2], ["teddy bear", 2]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "af6b63acc400", "objects": [["sheep", 5], ["suitcase", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "afd6a23464b9", "objects": [["elephant", 4]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "afdd50577178", "objects": [["dog", 1], ["bottle", 2]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "b0846b517485", "objects": [["dog", 3], ["car", 1], ["teddy bear", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "b09bdbdef61f", "objects": [["bicycle", 4], ["boat", 3]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "b126346ee87e", "objects": [["person", 2], ["cup", 5], ["apple", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "b1c9233b4c94", "objects": [["car", 3], ["apple", 2], ["teddy bear", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "b2ae9c68d55f", "objects": [["person", 2], ["dog", 1], ["teddy bear", 2]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "b321ed039e69", "objects": [["bus", 1], ["apple", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "b33053f796d7", "objects": [["apple", 5], ["clock", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "b58a62e0283d", "objects": [["person", 4], ["apple", 3], ["teddy bear", 4]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "b5d4da8951e4", "objects": [["bus", 3], ["sheep", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "b6170e894e6e", "objects": [["clock", 4]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "b688c2f29283", "objects": [["dog", 4], ["apple", 1], ["umbrella", 2]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "b7887fa0351d", "objects": [["elephant", 5], ["chair", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "b8b9ef64bd65", "objects": [["dog", 3], ["cup", 2], ["umbrella", 3]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "b9992d3565d9", "objects": [["cup", 4], ["apple", 2], ["teddy bear", 2]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "b9e2b994b7cd", "objects": [["car", 5], ["apple", 2], ["elephant", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "ba132da17daa", "objects": [["person", 3], ["elephant", 5], ["umbrella", 4]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "ba92ff7606b3", "objects": [["umbrella", 5], ["bottle", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "bd1b68cc9a00", "objects": [["bicycle", 4], ["potted plant", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "bd31dcc5cf1c", "objects": [["boat", 1], ["backpack", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "bd39d5af0c12", "objects": [["suitcase", 1], ["teddy bear", 4]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "be2939b67536", "objects": [["person", 3], ["car", 2], ["umbrella", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "be2d61c1d71d", "objects": [["car", 1], ["elephant", 2], ["teddy bear", 2]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "be6c19d1a9e7", "objects": [["elephant", 4], ["wine glass", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "beba8850b93c", "objects": [["car", 3], ["elephant", 2], ["umbrella", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "bf3b928aa6a0", "objects": [["person", 1], ["apple", 5], ["umbrella", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "c0a33e0ac88c", "objects": [["person", 1], ["dog", 1], ["car", 5]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "c18a13538cbb", "objects": [["bottle", 5], ["clock", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "c20c77369d30", "objects": [["person", 3], ["car", 5], ["elephant", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "c2bcd0bf5f2e", "objects": [["boat", 2], ["suitcase", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "c37e37705859", "objects": [["bird", 5], ["backpack", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "c3c2832dcec3", "objects": [["person", 5], ["dog", 4], ["car", 2]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "c40e0bab44f0", "objects": [["elephant", 3], ["bowl", 4]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "c411c67e8b55", "objects": [["person", 1], ["car", 2], ["elephant", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "c42eb027f5d9", "objects": [["wine glass", 5]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "c489f850e016", "objects": [["apple", 3], ["elephant", 2], ["teddy bear", 2]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "c49e3ac20b57", "objects": [["bicycle", 5], ["bus", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "c4c02189fb9f", "objects": [["person", 5], ["car", 1], ["elephant", 4]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "c4efb419faa5", "objects": [["bottle", 4]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "c5e753b693ef", "objects": [["cat", 3]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "c6ae92e50f39", "objects": [["suitcase", 2]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "c6eb225dbda1", "objects": [["dog", 3], ["cup", 3], ["umbrella", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "c6fe99f493b6", "objects": [["person", 5], ["dog", 1], ["teddy bear", 5]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "c745c5cdd24e", "objects": [["apple", 3]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "c78dad7dd4d8", "objects": [["bird", 5], ["bowl", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "c80fe7a13d74", "objects": [["elephant", 3], ["potted plant", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "c824917825a0", "objects": [["dog", 4], ["car", 2], ["apple", 4]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "c8ef55eacee6", "objects": [["elephant", 3], ["clock", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "c94b009f396f", "objects": [["person", 2], ["cup", 2], ["umbrella", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "ca1445ae8a21", "objects": [["bus", 5]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "cadc5420a32d", "objects": [["car", 1], ["cup", 1], ["umbrella", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "cb74317db147", "objects": [["bicycle", 2], ["potted plant", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "cb77421b31f9", "objects": [["clock", 1]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "cbe2d14dde8e", "objects": [["cup", 2], ["elephant", 2], ["teddy bear", 2]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "cc88d016c98a", "objects": [["wine glass", 1]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "ccd3d330104b", "objects": [["dog", 5], ["cup", 3], ["elephant", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "ccf9f3c182fa", "objects": [["wine glass", 4], ["bowl", 4]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "cdb427e55d47", "objects": [["bottle", 5]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "cdf876dc59a1", "objects": [["car", 1], ["apple", 2], ["teddy bear", 3]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "d00a3cf749d7", "objects": [["elephant", 1], ["bottle", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "d13773d7d698", "objects": [["cup", 3], ["elephant", 2], ["umbrella", 2]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "d2c8e4ed3b05", "objects": [["bicycle", 3], ["cup", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "d47dd1aabe3c", "objects": [["umbrella", 5], ["chair", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "d484a0c468b3", "objects": [["dog", 5]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "d52cb711a655", "objects": [["wine glass", 1], ["chair", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "d70806e76142", "objects": [["person", 3], ["dog", 5], ["car", 1]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "d83dc541f032", "objects": [["bird", 1], ["cup", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "d8d0cdf517c1", "objects": [["dog", 1], ["cup", 2], ["apple", 4]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "d9b1d60aefcd", "objects": [["person", 1]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "dad4c1c4352a", "objects": [["car", 1], ["cup", 5], ["teddy bear", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "db7ef993a1f9", "objects": [["person", 3], ["clock", 4]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "dc6dfa06bfc0", "objects": [["person", 2], ["dog", 5], ["car", 2]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "dc9d3ee7d34b", "objects": [["dog", 5], ["teddy bear", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "dcbb67911e21", "objects": [["banana", 5], ["potted plant", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "dd87d169ef9b", "objects": [["person", 4], ["car", 3], ["teddy bear", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "ddd33f1e27cf", "objects": [["person", 2], ["apple", 5], ["umbrella", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "dea616203c8f", "objects": [["cup", 5], ["apple", 5], ["elephant", 3]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "ded7baed9e84", "objects": [["car", 3], ["cup", 4], ["elephant", 5]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "df7dd9f9f694", "objects": [["bicycle", 5], ["chair", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "df831ca79fec", "objects": [["person", 4], ["backpack", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "e04fb6c22f44", "objects": [["elephant", 5], ["banana", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "e09659393b6a", "objects": [["dog", 5], ["elephant", 2], ["teddy bear", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "e0c1b421cfc7", "objects": [["person", 2], ["apple", 2], ["teddy bear", 5]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "e0d7f25315fe", "objects": [["horse", 2], ["chair", 5]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "e13f7d7c2d6d", "objects": [["dog", 5], ["cup", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "e21287639b91", "objects": [["sheep", 1], ["umbrella", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "e27769d9a03d", "objects": [["person", 3], ["dog", 3], ["car", 1]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "e2a9d10ea854", "objects": [["horse", 1], ["sheep", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "e2cf4fab06c3", "objects": [["car", 5], ["cup", 5], ["apple", 4]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "e304250226ef", "objects": [["car", 4], ["cup", 2], ["elephant", 4]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "e3ed5b26abfb", "objects": [["person", 3], ["car", 3], ["apple", 3]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "e44c9cc9a1ac", "objects": [["dog", 5], ["apple", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "e488b33a5ec1", "objects": [["dog", 2], ["elephant", 1], ["umbrella", 2]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "e51e330ed416", "objects": [["car", 2], ["umbrella", 5], ["teddy bear", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "e55d48856a87", "objects": [["car", 5], ["apple", 5], ["umbrella", 4]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "e661ee0844e7", "objects": [["cat", 4]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "e673e86a5be1", "objects": [["banana", 2]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "e85af04b0866", "objects": [["dog", 5], ["car", 5], ["elephant", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "e994be6872c9", "objects": [["bus", 4], ["apple", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "ea7b6053e277", "objects": [["person", 4], ["apple", 1], ["elephant", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "eb2d326ef430", "objects": [["elephant", 3], ["umbrella", 5], ["teddy bear", 4]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "eb8015b6ebd0", "objects": [["person", 5], ["car", 1], ["cup", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "ec691705c838", "objects": [["person", 5], ["horse", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "ec7f7dcd794d", "objects": [["dog", 5], ["cup", 2], ["teddy bear", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "ed073fd33020", "objects": [["car", 2], ["apple", 4], ["elephant", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "edcb390f6c23", "objects": [["horse", 4], ["sheep", 4]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "edd46743971c", "objects": [["car", 4], ["elephant", 5], ["teddy bear", 2]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "edd9910afe5f", "objects": [["person", 5], ["car", 5], ["cup", 1]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "ee81fb2cf5a8", "objects": [["person", 5], ["car", 5], ["umbrella", 4]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "ee99aa79d46b", "objects": [["banana", 1], ["apple", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "eea04d307094", "objects": [["dog", 4], ["car", 2], ["elephant", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "eff10a5e3379", "objects": [["dog", 3], ["car", 4], ["apple", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "f06678f34260", "objects": [["apple", 1], ["umbrella", 3], ["teddy bear", 5]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "f0abf08bcee9", "objects": [["dog", 4], ["car", 5], ["cup", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "f0dc291564de", "objects": [["car", 1]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "f24c7d30f7fe", "objects": [["dog", 5], ["horse", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "f257d73b80bd", "objects": [["cup", 5], ["umbrella", 4], ["teddy bear", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "f2f91f8a3ec3", "objects": [["cat", 5], ["bird", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "f3171435edc7", "objects": [["horse", 5], ["bowl", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "f3b88ffef7d0", "objects": [["bus", 2]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "f447346acd3f", "objects": [["dog", 5], ["car", 5], ["elephant", 1]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "f467cba8ff58", "objects": [["sheep", 5], ["banana", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "f498c269289b", "objects": [["person", 4], ["potted plant", 5]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "f49dc5ac2a43", "objects": [["person", 5], ["car", 4], ["umbrella", 3]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "f59b8ab7c44d", "objects": [["elephant", 3], ["bottle", 2]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "f7020a070c0f", "objects": [["bus", 4], ["boat", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "f72b031ae321", "objects": [["boat", 5], ["bowl", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "f8060b490b7a", "objects": [["dog", 1], ["cup", 3], ["umbrella", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "f8be82fac9a3", "objects": [["cup", 1], ["elephant", 2], ["teddy bear", 4]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "f90dc345d8c1", "objects": [["horse", 1], ["wine glass", 1]], "split": "test_ood_pair", "dataset": "v3"}
+{"prompt_id": "f91c6ee1e0ce", "objects": [["car", 5], ["bowl", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "f93a6e2ceb2d", "objects": [["sheep", 3], ["bowl", 2]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "f9f64f123474", "objects": [["person", 1], ["car", 5], ["cup", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "fa7cda052c8d", "objects": [["car", 4], ["apple", 4], ["umbrella", 4]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "fc14ef7247b2", "objects": [["elephant", 5]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "fc57451ead87", "objects": [["bird", 5], ["potted plant", 1]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "fe27792d0334", "objects": [["boat", 5], ["bottle", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "fe42a3d291de", "objects": [["dog", 2], ["car", 2], ["cup", 5]], "split": "test_id", "dataset": "v3"}
+{"prompt_id": "ff14048da252", "objects": [["apple", 3], ["elephant", 5], ["umbrella", 5]], "split": "test_ood_count", "dataset": "v3"}
+{"prompt_id": "ff356c91b4aa", "objects": [["person", 3], ["car", 2], ["apple", 1]], "split": "test_ood_triple", "dataset": "v3"}
+{"prompt_id": "ff57e2bb0c4d", "objects": [["teddy bear", 4]], "split": "test_single", "dataset": "v3"}
+{"prompt_id": "fff87ccd2c63", "objects": [["clock", 2]], "split": "test_single", "dataset": "v3"}

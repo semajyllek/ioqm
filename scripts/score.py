@@ -15,6 +15,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from ioqm.counters import DEFAULT_THRESHOLDS, get_counter, resolve
 from ioqm.detect import detect_run, score_run
 from ioqm.metrics import summarize
 
@@ -23,17 +24,19 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--run_dir", required=True)
     ap.add_argument("--detector", required=True,
-                    help="facebook/detr-resnet-50 | facebook/detr-resnet-101 | jozhang97/deta-swin-large | yolo")
+                    help="counter key from ioqm.counters: yolov8x | mask2former | detr_r50 | detr_r101 | deta_swin_large "
+                         "(2023 ids such as 'yolo' are accepted too)")
     ap.add_argument("--floor", type=float, default=0.05)
-    ap.add_argument("--threshold", type=float, default=0.5)
+    ap.add_argument("--threshold", type=float, default=None, help="default: the counter's DEFAULT_THRESHOLDS value")
     ap.add_argument("--thresholds_json", default=None, help="per-class {class: threshold}; overrides --threshold")
     ap.add_argument("--skip_detect", action="store_true")
     args = ap.parse_args()
 
-    det_name = args.detector.split("/")[-1]
+    det_name = resolve(args.detector)
+    if args.threshold is None:
+        args.threshold = DEFAULT_THRESHOLDS[det_name]
     if not args.skip_detect:
-        from run_eval import get_detector
-        n = detect_run(Path(args.run_dir), get_detector(args.detector), det_name, floor=args.floor)
+        n = detect_run(Path(args.run_dir), get_counter(det_name), det_name, floor=args.floor)
         print(f"detected {n} new images")
 
     if args.thresholds_json:

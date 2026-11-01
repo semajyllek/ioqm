@@ -6,5 +6,5 @@ timm
 invisible_watermark 
 safetensors
 textblob
-ultralytics==8.0.28
-sahi==0.11.11
+ultralytics>=8.3   # was 8.0.28 in 2023; that version breaks with torch>=2.6 weights_only loading
+sahi   # only used by the legacy detector_models/ wrappers
