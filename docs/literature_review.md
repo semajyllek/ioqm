@@ -31,6 +31,39 @@ IOQM is **not** the only benchmark with joint multi-class counts. At least six o
 
 Single-class counting benchmarks include T2ICountBench (counts 1–15, no model averages above 50%) and CoCoCount (from Make It Count).
 
+### How each benchmark scores counts
+
+Benchmarks disagree less about *what* to count than about *how to score* a near miss. Every scheme below sits somewhere between two extremes: all-or-nothing exact match, and graded credit for partial correctness. Who does the counting also differs: a closed-set detector, an open-vocabulary detector ensemble, a VLM, or humans.
+
+| Benchmark | Who counts | Unit scored | Scoring rule |
+|---|---|---|---|
+| GenEval `counting` | Mask2Former (threshold 0.9 for counting) | image, one class | Pass/fail: the detected count equals N |
+| GenEval++ | GPT-4.1 checklist | image | Pass only if every condition in the prompt holds |
+| T2I-CompBench++ numeracy | UniDet | each object, averaged | Each of n objects earns 1/(2n) for being detected and another 1/(2n) for the exact count |
+| GeckoNum | 5 human annotators (mode count) | each noun | Exact-number accuracy for each noun |
+| HRS-Bench counting | UniDet | image | Precision / recall / F1 on counts (exact formula not verified) |
+| M3T2IBench | Mask2Former (0.3, NMS IoU 0.9) | image | Count bias Σₖ\|nₖ − mₖ\|, the total instance error, inside a combined AlignScore |
+| NumBench | 3-detector ensemble with count-dependent thresholds | image | cw-NPS, a confidence-weighted numeric precision score |
+| GenEval 2 | Qwen3-VL-8B (Soft-TIFA) | each atom | Mean (arithmetic or geometric) of the VLM's P(yes) for each atom, e.g. "are there 3 dogs?" |
+| TIFA / DSG / VQAScore | VQA model | question / prompt | Count questions answered by VQA. VQAScore gives a single holistic P(yes) |
+| T2ICountBench | 5 human graders | prompt | Pass if any of 4 samples has the right count |
+| CoCoCount (Make It Count) | YOLOv9, and humans | image, one class | Exact-count accuracy |
+| **Ours (v3)** | Calibrated detector, validated against human labels (Phase 1) | image, plus each object | **Count accuracy** (all types exact) as the headline. Diagnostics: per-object count accuracy, count MAE, signed count bias, extra-object rate |
+
+**Worked example.** Prompt: "2 cats and 2 dogs". The image has **3 cats and 2 dogs**.
+
+| Scheme | Score | Why |
+|---|---|---|
+| Exact match (GenEval-style; ours, headline) | **0** | The cat count is wrong |
+| T2I-CompBench++ | **0.75** | Cats: ¼ for being detected + 0 (count wrong). Dogs: ¼ + ¼ |
+| GeckoNum-style, per noun | **0.5** | 1 of 2 nouns has the exact count |
+| M3T2IBench count bias | **1** (lower is better) | \|3−2\| + \|2−2\| |
+| Ours: per-object count accuracy / MAE / bias | **0.5 / 0.5 / +0.5** | Diagnostics: one of two types right; off by 0.5 objects per type on average; overgenerates |
+
+The same image scores anywhere from 0 to 0.75 depending on the benchmark. That's why numbers from different benchmarks can't be compared directly, and why this project re-runs every baseline under one fixed scheme.
+
+**Why exact match is our headline.** "Generate 2 cats and 2 dogs" is satisfied only if both counts are right. Partial-credit schemes reward images that a user would reject. Exact match also extends GenEval's established counting metric to 2–3 types, so the numbers are easy to interpret. The diagnostics stay because they show *how* a model fails: over- or under-generation, dropped types, or extra objects. Those failure modes are what steering methods target.
+
 **What IOQM adds.** No other benchmark combines all four of the following:
 1. Exhaustive class × count enumeration: every pair and triple of classes, at every count from 1 to 5.
 2. Unnatural co-occurrences included deliberately. HRS-Bench goes the other way and has an LLM rewrite prompts into plausible scenes.

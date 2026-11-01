@@ -27,6 +27,20 @@ The order is fixed: **instrument, then baselines, then method**. Each phase ends
 
 Fixing bug 3 also fixes the hard metric for every "people" prompt.
 
+### Reporting names
+
+Report results in the field's terms, not as "IOQM". The headline is **count accuracy**, an exact-match rate in the style of GenEval's counting task, extended to 2–3 object types.
+
+| Paper name | Code field |
+|---|---|
+| Count accuracy (headline) | `prompt_exact` |
+| Per-object count accuracy | `type_exact` |
+| Count MAE | `abs_err` |
+| Count bias | `signed_err` |
+| Extra-object rate | `extra_class` |
+
+`type_soft` is a secondary diagnostic only.
+
 ### Metrics, fixed before any results come in
 
 - **Primary:** prompt-level exact match, meaning every requested type has exactly the right count. This is stricter than the current hard IOQM and is the metric no other benchmark reports.
