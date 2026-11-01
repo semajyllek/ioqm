@@ -1,0 +1,76 @@
+{
+  "pair_classes": [
+    "person",
+    "bicycle",
+    "car",
+    "bus",
+    "boat",
+    "dog",
+    "cat",
+    "horse",
+    "sheep",
+    "elephant",
+    "bird",
+    "umbrella",
+    "backpack",
+    "suitcase",
+    "bottle",
+    "wine glass",
+    "cup",
+    "bowl",
+    "banana",
+    "apple",
+    "chair",
+    "potted plant",
+    "teddy bear",
+    "clock"
+  ],
+  "triple_classes": [
+    "person",
+    "dog",
+    "car",
+    "cup",
+    "apple",
+    "elephant",
+    "umbrella",
+    "teddy bear"
+  ],
+  "max_count": 5,
+  "seed": 0,
+  "n_total": 14020,
+  "by_split": {
+    "test_single": 120,
+    "train": 7091,
+    "test_id": 1845,
+    "test_ood_count": 639,
+    "test_ood_pair": 3325,
+    "test_ood_triple": 1000
+  },
+  "by_n_types": {
+    "1": 120,
+    "2": 6900,
+    "3": 7000
+  },
+  "eval_subset": {
+    "n": 2985,
+    "by_split": {
+      "test_ood_count": 268,
+      "test_ood_pair": 1119,
+      "test_ood_triple": 466,
+      "test_id": 1012,
+      "test_single": 120
+    },
+    "by_n_types": {
+      "3": 1564,
+      "2": 1301,
+      "1": 120
+    },
+    "by_max_count": {
+      "5": 962,
+      "1": 153,
+      "2": 485,
+      "4": 694,
+      "3": 691
+    }
+  }
+}
