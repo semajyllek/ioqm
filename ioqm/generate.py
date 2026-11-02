@@ -141,6 +141,7 @@ class DiffusersBackend:
             self.pipe.enable_sequential_cpu_offload()
         else:
             raise ValueError(offload)
+        self.pipe.set_progress_bar_config(disable=True)  # run_generation prints its own progress
 
     def generate(self, prompt: str, seed: int):
         import torch
@@ -166,6 +167,8 @@ class SDXLEnsembleBackend:
         self.refiner = DiffusionPipeline.from_pretrained(
             "stabilityai/stable-diffusion-xl-refiner-1.0", text_encoder_2=self.base.text_encoder_2,
             vae=self.base.vae, torch_dtype=dt, variant="fp16", use_safetensors=True).to(device)
+        for p in (self.base, self.refiner):
+            p.set_progress_bar_config(disable=True)
 
     def generate(self, prompt: str, seed: int):
         import torch
