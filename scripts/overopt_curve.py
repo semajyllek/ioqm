@@ -75,7 +75,8 @@ def main():
             for v in sorted({r[args.by] for r in gold_rows}, key=str):
                 strata[f"{args.by}={v}"] = [r for r in gold_rows if r[args.by] == v]
         for name, grows in strata.items():
-            res, info = curve(prows, grows, args.ks, n_boot=args.n_boot)
+            pids = {r["prompt_id"] for r in grows}
+            res, info = curve([r for r in prows if r["prompt_id"] in pids], grows, args.ks, n_boot=args.n_boot)
             print(f"\n== proxy={proxy}  gold={gold}  [{name}]  "
                   f"(prompts={info['prompts']}, images without gold={info['images_without_gold']}, "
                   f"prompt-k pairs skipped for too few seeds={info['skipped_prompt_k']})")
