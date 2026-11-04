@@ -261,6 +261,10 @@ Run all cells. The labeller opens below the last cell.
 
 You only see the class names, not what was asked for or what the counters found. That's on purpose, so the labels aren't anchored.
 
+Keys: **1/2/3** pick the class, **z** undoes a click, **a** toggles Ambiguous, **Enter** submits.
+
+On a Mac with Google Drive for desktop you can skip Colab entirely: `python scripts/label.py` (or `--round picks`) opens the same labeller in your browser.
+
 Progress is saved after every image. Close the tab any time; next session starts at the first unlabelled image. Resubmitting an image later overwrites the earlier label.
 
 **Which queue:** two labelling rounds, each with its own labels file. Set both lines together.
@@ -284,9 +288,9 @@ LABELER = 'labeler_1'      # change if someone else labels, so their labels can 
 !pip install -q gradio
 """),
     code("""
-from ioqm.labeler import build_app
+from ioqm.labeler import build_app, launch
 app = build_app(QUEUE, LABELS, LABELER)
-app.launch()          # add share=True for a public link, e.g. to label on a tablet
+launch(app)          # launch(app, share=True) gives a public link, e.g. to label on a tablet
 """),
 ]
 

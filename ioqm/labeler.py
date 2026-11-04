@@ -12,13 +12,20 @@ Design choices:
 - Append-only JSONL with resume: the last record for an item wins, so a
   correction is just another submit.
 
-Pure functions (testable without Gradio) come first; build_app() wires the UI.
+- Keyboard: 1/2/3 pick the class, z undoes the last click, a toggles
+  Ambiguous, Enter submits. The mouse is only needed to click objects.
+- Runs in Colab (notebooks/label_colab.ipynb) or locally (scripts/label.py),
+  where `path_map` points the queue's Colab paths at a local Drive folder.
+
+Pure functions (testable without Gradio) come first; build_app() wires the UI
+and launch() starts it with the keyboard shortcuts.
 """
 
 # no `from __future__ import annotations`: Gradio reads the gr.SelectData annotation at runtime
 
 import json
 import os
+import threading
 import time
 from pathlib import Path
 from typing import Dict, List, Mapping, Optional, Sequence, Tuple
@@ -78,23 +85,94 @@ def append_label(path: Path, rec: Mapping) -> None:
 
 
 def render(image_path: str, classes: Sequence[str], points: Mapping[str, Sequence]):
-    from PIL import Image, ImageDraw
+    from PIL import Image, ImageDraw, ImageFont
     img = Image.open(image_path).convert("RGB")
     draw = ImageDraw.Draw(img)
-    r = max(6, img.width // 90)
+    r = max(8, img.width // 60)
+    try:
+        font = ImageFont.load_default(size=int(r * 1.8))
+    except TypeError:  # Pillow < 10.1
+        font = ImageFont.load_default()
     for slot, c in enumerate(classes):
         for i, (x, y) in enumerate(points.get(c, []), 1):
-            draw.ellipse([x - r, y - r, x + r, y + r], fill=COLORS[slot], outline="white", width=2)
-            draw.text((x + r + 2, y - r), str(i), fill=COLORS[slot])
+            draw.ellipse([x - r, y - r, x + r, y + r], fill=COLORS[slot], outline="white", width=3)
+            draw.text((x + r + 3, y - 2 * r), str(i), fill=COLORS[slot], font=font,
+                      stroke_width=2, stroke_fill="white")
     return img
 
 
-def image_path(item: Mapping) -> str:
-    from .generate import images_dir
-    return str(images_dir(Path(item["run_dir"])) / item["image"])
+PathMap = Optional[Tuple[str, str]]
 
 
-def build_app(queue_path: Path, labels_path: Path, labeler: str):
+def map_path(path: str, path_map: PathMap) -> str:
+    """Replace a leading prefix, e.g. ('/content/drive/MyDrive', '~/.../My Drive')."""
+    if path_map and str(path).startswith(path_map[0]):
+        return path_map[1] + str(path)[len(path_map[0]):]
+    return str(path)
+
+
+def image_path(item: Mapping, path_map: PathMap = None) -> str:
+    run = Path(map_path(item["run_dir"], path_map))
+    ptr = run / "images_path.txt"      # imported 2023 runs point at their original folder
+    img_dir = map_path(ptr.read_text().strip(), path_map) if ptr.exists() else str(run / "images")
+    return str(Path(img_dir) / item["image"])
+
+
+def prefetch(paths: Sequence[str]) -> None:
+    """Read the next images in the background, so a streamed Drive folder has them
+    cached before they are shown."""
+    def run():
+        for p in paths:
+            try:
+                with open(p, "rb") as f:
+                    f.read()
+            except OSError:
+                pass
+    threading.Thread(target=run, daemon=True).start()
+
+
+KEYS_JS = """
+<script>
+(() => {
+  const press = (sel) => {
+    const el = document.querySelector(sel);
+    if (!el) return false;
+    const target = el.tagName === 'BUTTON' || el.tagName === 'INPUT' ? el : (el.querySelector('button, input') || el);
+    target.click();
+    return true;
+  };
+  document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    const t = e.target, tag = (t.tagName || '').toLowerCase();
+    const typing = tag === 'textarea' || (tag === 'input' && !['radio', 'checkbox'].includes(t.type));
+    if (typing) {
+      // in a count box, Enter still submits; everything else is normal typing
+      if (e.key === 'Enter' && t.type === 'number') { t.blur(); setTimeout(() => press('#ioqm-submit'), 50); e.preventDefault(); }
+      return;
+    }
+    if (['1', '2', '3'].includes(e.key)) {
+      const r = document.querySelectorAll('#ioqm-active input[type=radio]');
+      const i = Number(e.key) - 1;
+      if (r[i]) { r[i].click(); e.preventDefault(); }
+    } else if (e.key === 'z') { if (press('#ioqm-undo')) e.preventDefault(); }
+    else if (e.key === 'a') { if (press('#ioqm-amb input')) e.preventDefault(); }
+    else if (e.key === 'Enter') { if (press('#ioqm-submit')) e.preventDefault(); }
+  });
+})();
+</script>
+"""
+
+
+def launch(app, **kwargs):
+    """Start the app with the keyboard shortcuts (Gradio >= 6 takes `head` in launch();
+    older versions ignore the shortcuts rather than fail)."""
+    try:
+        return app.launch(head=KEYS_JS, **kwargs)
+    except TypeError:
+        return app.launch(**kwargs)
+
+
+def build_app(queue_path: Path, labels_path: Path, labeler: str, path_map: PathMap = None):
     import gradio as gr
     from .classes import prompt_noun
 
@@ -117,9 +195,11 @@ def build_app(queue_path: Path, labels_path: Path, labeler: str):
         counts = point_counts(classes, st["points"])
         nums = [gr.update(visible=True, label=f"{nouns[i]}  ({['red', 'green', 'blue'][i]})", value=counts[i])
                 if i < len(classes) else gr.update(visible=False, value=0) for i in range(MAX_TYPES)]
+        prefetch([image_path(queue[j], path_map) for j in range(st["idx"] + 1, min(len(queue), st["idx"] + 4))])
         msg = (f"Item {st['idx'] + 1} of {len(queue)}  ·  labelled {n_done}  ·  "
-               f"count every **{' / '.join(nouns)}** you can see, including partly hidden ones.")
-        return [render(image_path(item), classes, st["points"]),
+               f"count every **{' / '.join(nouns)}** you can see, including partly hidden ones.  \n"
+               f"Keys: **1/2/3** class · **z** undo · **a** ambiguous · **Enter** submit")
+        return [render(image_path(item, path_map), classes, st["points"]),
                 gr.update(choices=nouns, value=nouns[0]), *nums, False, "", msg]
 
     def on_click(st, active_noun, evt: gr.SelectData):
@@ -128,7 +208,7 @@ def build_app(queue_path: Path, labels_path: Path, labeler: str):
         item = queue[st["idx"]]
         cls = item["classes"][[prompt_noun(c, 2) for c in item["classes"]].index(active_noun)]
         add_point(st["points"], st["history"], cls, evt.index)
-        return st, render(image_path(item), item["classes"], st["points"]), *_nums(st)
+        return st, render(image_path(item, path_map), item["classes"], st["points"]), *_nums(st)
 
     def _nums(st):
         classes = queue[st["idx"]]["classes"]
@@ -140,14 +220,14 @@ def build_app(queue_path: Path, labels_path: Path, labeler: str):
             return st, gr.update(), *([gr.update()] * MAX_TYPES)
         undo(st["points"], st["history"])
         item = queue[st["idx"]]
-        return st, render(image_path(item), item["classes"], st["points"]), *_nums(st)
+        return st, render(image_path(item, path_map), item["classes"], st["points"]), *_nums(st)
 
     def on_clear(st):
         if st["idx"] is None:
             return st, gr.update(), *([gr.update()] * MAX_TYPES)
         st["points"], st["history"] = {}, []
         item = queue[st["idx"]]
-        return st, render(image_path(item), item["classes"], st["points"]), *_nums(st)
+        return st, render(image_path(item, path_map), item["classes"], st["points"]), *_nums(st)
 
     def save_and_next(st, skipped, ambiguous, notes, *nums):
         if st["idx"] is not None:
@@ -165,16 +245,16 @@ def build_app(queue_path: Path, labels_path: Path, labeler: str):
         progress = gr.Markdown()
         with gr.Row():
             with gr.Column(scale=3):
-                img = gr.Image(type="pil", interactive=False, show_label=False, height=640)
+                img = gr.Image(type="pil", interactive=False, show_label=False, height=560)
             with gr.Column(scale=1):
-                active = gr.Radio(label="Clicking adds a", choices=[])
+                active = gr.Radio(label="Clicking adds a", choices=[], elem_id="ioqm-active")
                 nums = [gr.Number(precision=0, minimum=0) for _ in range(MAX_TYPES)]
                 with gr.Row():
-                    b_undo = gr.Button("Undo click")
+                    b_undo = gr.Button("Undo click (z)", elem_id="ioqm-undo")
                     b_clear = gr.Button("Clear clicks")
-                amb = gr.Checkbox(label="Ambiguous (fused / partial / unclear class)")
+                amb = gr.Checkbox(label="Ambiguous: fused / partial / unclear class (a)", elem_id="ioqm-amb")
                 notes = gr.Textbox(label="Notes (optional)", lines=2)
-                b_submit = gr.Button("Submit", variant="primary")
+                b_submit = gr.Button("Submit (Enter)", variant="primary", elem_id="ioqm-submit")
                 b_skip = gr.Button("Skip (image unusable)")
         view_out = [img, active, *nums, amb, notes, progress]
         app.load(lambda s: view(s), inputs=state, outputs=view_out)
