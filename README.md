@@ -52,7 +52,7 @@ Notebook cells only call `scripts/`; all logic lives in `ioqm/` and is unit-test
 | [`notebooks/overopt_colab.ipynb`](notebooks/overopt_colab.ipynb) | A100 | Over-optimization study: best-of-k up to 64 against each proxy counter, scored by an independent gold judge; human check of real picks; mechanism analyses |
 | [`notebooks/label_colab.ipynb`](notebooks/label_colab.ipynb) | CPU | Blind click-to-count labeller for either labelling queue |
 
-To label on a Mac instead of Colab, with Google Drive for desktop set to *Stream files*: `pip install gradio`, then `python scripts/label.py` (round 1) or `python scripts/label.py --round picks` (round 2). It opens in your browser and downloads only the queued images. Keys: 1/2/3 class, z undo, a ambiguous, Enter submit.
+To label on a Mac instead of Colab, with Google Drive for desktop set to *Stream files*: create a virtualenv once (`python3 -m venv .venv && .venv/bin/pip install gradio`), then `.venv/bin/python scripts/label.py` (round 1) or `.venv/bin/python scripts/label.py --round picks` (round 2). It opens in your browser and downloads only the queued images. Keys: 1/2/3 class, z undo, a ambiguous, Enter submit.
 
 Open one from GitHub in Colab, e.g. `https://colab.research.google.com/github/semajyllek/ioqm/blob/phase0-harness/notebooks/overopt_colab.ipynb`, and use Run all. Every step resumes after a disconnect; data lives on Drive under `MyDrive/ioqm_data/`.
 

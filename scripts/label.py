@@ -1,9 +1,9 @@
 """
 Run the labeller on this computer, reading images from Google Drive for desktop.
 
-    pip install gradio            # once
-    python scripts/label.py                    # round 1: queue_v1 -> labels.jsonl
-    python scripts/label.py --round picks      # round 2: queue_picks -> labels_picks.jsonl
+    python3 -m venv .venv && .venv/bin/pip install gradio     # once, isolated from other projects
+    .venv/bin/python scripts/label.py                    # round 1: queue_v1 -> labels.jsonl
+    .venv/bin/python scripts/label.py --round picks      # round 2: queue_picks -> labels_picks.jsonl
 
 Opens in your browser. Queue items carry Colab paths (/content/drive/MyDrive/...);
 they are mapped to the local Drive folder, so only the queued images are
