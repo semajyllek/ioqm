@@ -185,3 +185,17 @@ GenEval's counting task is saturated. Joint counting is not:
    - Unproven at 3 types with up to 15 instances. No count-control method has been tested on 3-type joint prompts.
 3. **Verifier-guided best-of-N or reflection**, layered on either route. It is trivial to add.
    - Inflated by construction if the verifier is the evaluation counter.
+
+---
+
+## 4. Addendum (2026-11-03): newer work that changes the positioning
+
+Found in a follow-up search. Each was checked against its arXiv abstract or NeurIPS page; numbers below are from those pages only.
+
+- **Verifier Choice is a Benchmark Design Variable** (Li, Wang, Zeng, Wang; NeurIPS 2026 poster, OpenReview wUGdrU38xm). Audits counting verifiers on 6,240 Qwen-Image-2512 and FLUX.2-dev images over seven objects. Changing verifier, protocol or model size moves automatic scores by tens of points. Best open verifier: Qwen3.5-27B, few-shot reject/count, κ = 0.754. Proposes reporting a verifier reliability profile instead of one score. **Overlap with IOQM:** the claim that the counter is part of the benchmark. **Not covered there:** multi-type joint counts, and what verifier error does to *optimization* (best-of-N, RL). Our pilot measures that directly: at k = 16, self-scored accuracy is about 0.2 above cross-counter accuracy.
+- **M3T2IBench, full results** (2510.23020). Count bias, lower is better: SD1.5 2.98, SD3.5-M 1.43, FLUX.1-dev 1.27, DALL·E 3 1.41. Its training-free Revise-Then-Enforce method only moves bias slightly (SD3.5-M 1.43 → 1.37). Attend-and-Excite and Composable Diffusion gave no notable gain. AlignScore vs human Likert: Pearson r = 0.67, on 500 images with two annotators. **So no method yet makes a large gain on multi-category joint counts.**
+- **When Do Diffusion Models Learn to Generate Multiple Objects?** (2605.00273). Trains diffusion models from scratch on a controlled synthetic framework ("mosaic"). Counting is uniquely hard in low-data regimes, and compositional generalization collapses as more concept combinations are held out. Related to IOQM's held-out-pair splits, but on small models trained from scratch, not pretrained generators, and without real-data co-occurrence statistics.
+- **Demystifying Numerosity in Diffusion Models** (2510.11117). Scaling data and model size does not fix counting; the noise initialization is biased toward certain counts. Count-aware layout injected into the noise raises GrayCount250 accuracy from 20.0% to 85.3%. Single class.
+- **ABACUS** (2606.23835) is single-class count generation (already in §3). **UniCounting** (2610.08379) is a multi-category *counter* (category → count vector from one image), a possible third instrument.
+
+**Updated gap statement.** Single-class counting is close to solved for counts ≤ 4 (Flow-GRPO 0.95 on GenEval; layout + self-correction 98% on LMD's benchmark). Multi-type joint counting is not: every benchmark that tests it reports poor scores, and the only method evaluated on it (Revise-Then-Enforce) gives small gains. Verifier reliability is now a recognized problem for *static* evaluation; its effect on *optimizing* against a counter is not yet measured.
