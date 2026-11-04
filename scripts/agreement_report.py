@@ -68,15 +68,21 @@ def main():
     for run in runs:
         run_p = Path(run)
         print(f"\n######## {run}")
-        rows = {c: rows_for(run_p, c) for c in counters}
+        rows = {}
+        for c in counters:
+            try:
+                rows[c] = rows_for(run_p, c)
+            except FileNotFoundError:
+                print(f"   ({c}: no detections in this run, skipped)")
+        counters_here = [c for c in counters if c in rows]
         print("\n== counter vs counter (whole run; second is the reference)")
-        for a, b in itertools.combinations(counters, 2):
+        for a, b in itertools.combinations(counters_here, 2):
             print(format_agreement(f"{a} vs {b}", agreement(rows[a], rows[b], n_boot=args.n_boot)))
         if run in labels:
             human = rows_for(run_p, HUMAN)
             w = labeled_weights(queue, run, [r["image"] for r in human]) if queue else None
             print(f"\n== counter vs human ({len(human)} labelled images)")
-            for c in counters:
+            for c in counters_here:
                 print(format_agreement(f"{c} (as sampled)", agreement(rows[c], human, n_boot=args.n_boot)))
                 if w:
                     print(format_agreement(f"{c} (weighted to run)", agreement(rows[c], human, w, n_boot=args.n_boot)))

@@ -69,6 +69,12 @@ def main():
         labels, repeats = dedupe(good)
         intra += repeats
         versions = [m.group("version")] if m.group("version") else ["v1", "v2"]
+        if not m.group("version"):
+            both = [k for k in labels if all((data / f"generated_images_{v}" / folder / k).exists() for v in ("v1", "v2"))]
+            if both:
+                print(f"WARNING {path.name}: no v1_/v2_ prefix and {len(both)} labelled file names exist in both "
+                      f"generated_images_v1 and _v2; they are attached to v1. Rename the file with the right prefix "
+                      f"if you labelled the v2 images.")
         for v in versions:
             img_folder = data / f"generated_images_{v}" / folder
             if not img_folder.is_dir():

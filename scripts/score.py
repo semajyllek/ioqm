@@ -15,7 +15,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from ioqm.counters import DEFAULT_THRESHOLDS, get_counter, resolve
+from ioqm.counters import COUNTS_ONLY, DEFAULT_THRESHOLDS, get_counter, resolve
 from ioqm.detect import detect_run, score_run
 from ioqm.metrics import summarize
 
@@ -30,13 +30,21 @@ def main():
     ap.add_argument("--threshold", type=float, default=None, help="default: the counter's DEFAULT_THRESHOLDS value")
     ap.add_argument("--thresholds_json", default=None, help="per-class {class: threshold}; overrides --threshold")
     ap.add_argument("--skip_detect", action="store_true")
+    ap.add_argument("--from_queue", default=None,
+                    help="labelling queue: detect only this run's queued images (e.g. a slow VLM counter)")
     args = ap.parse_args()
 
     det_name = resolve(args.detector)
     if args.threshold is None:
         args.threshold = DEFAULT_THRESHOLDS[det_name]
     if not args.skip_detect:
-        n = detect_run(Path(args.run_dir), get_counter(det_name), det_name, floor=args.floor)
+        only = None
+        if args.from_queue:
+            run_key = str(Path(args.run_dir))
+            only = [json.loads(l)["image"] for l in open(args.from_queue)
+                    if l.strip() and str(Path(json.loads(l)["run_dir"])) == run_key]
+            print(f"{len(only)} queued images from this run")
+        n = detect_run(Path(args.run_dir), get_counter(det_name), det_name, floor=args.floor, only=only)
         print(f"detected {n} new images")
 
     if args.thresholds_json:
@@ -50,7 +58,8 @@ def main():
                      ("by max_count", lambda r: r["max_count"]),
                      ("by split", lambda r: r["split"])):
         print(f"\n== {name}")
-        for k, ests in summarize(rows, by, metrics=("prompt_exact", "type_exact", "abs_err", "extra_class")).items():
+        metrics = ("prompt_exact", "type_exact", "abs_err") + (() if det_name in COUNTS_ONLY else ("extra_class",))
+        for k, ests in summarize(rows, by, metrics=metrics).items():
             print(f"  {k}: " + "  ".join(f"{m}={e.mean:.3f}[{e.lo:.3f},{e.hi:.3f}]" for m, e in ests.items())
                   + f"  (prompts={next(iter(ests.values())).n_prompts})")
 

@@ -222,3 +222,23 @@ def test_parse_error_images_are_excluded(tmp_path):
     detect_run(tmp_path, fake_vlm, "vlm")
     rows = score_run(tmp_path, "vlm", 0.5, "t0.5", save=False)
     assert len(rows) == 1 and rows[0]["expected"] == {"cat": 1}
+
+
+def test_detect_run_only_subset(tmp_path):
+    from ioqm.generate import REGISTRY, read_manifest, run_generation
+    from ioqm.prompts import make_spec
+
+    class FB:
+        config = REGISTRY["sd15"]
+
+        def generate(self, prompt, seed):
+            class Img:
+                def save(self, p):
+                    Path(p).write_text(prompt)
+            return Img()
+
+    run_generation(FB(), [make_spec([("dog", 2)]), make_spec([("cat", 1)])], [0, 1], tmp_path, log_every=0)
+    names = [r["image"] for r in read_manifest(tmp_path)]
+    det = lambda p, threshold, classes=None: []
+    assert detect_run(tmp_path, det, "d", only=names[:1]) == 1
+    assert detect_run(tmp_path, det, "d") == 3          # the rest, later

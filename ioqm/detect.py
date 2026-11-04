@@ -76,9 +76,11 @@ def detect_run(
     detector: Callable[..., Any],
     detector_name: str,
     floor: float = 0.05,
+    only: Optional[Iterable[str]] = None,
 ) -> int:
     """Run `detector(image_path, threshold=floor, classes=...)` on every manifest image
-    not yet detected. Resumable. Returns the number of newly processed images."""
+    not yet detected (or only on the image names in `only`). Resumable. Returns the
+    number of newly processed images."""
     from .generate import images_dir, read_manifest
 
     run_dir = Path(run_dir)
@@ -86,10 +88,11 @@ def detect_run(
     out = run_dir / "detections" / f"{detector_name}.jsonl"
     out.parent.mkdir(parents=True, exist_ok=True)
     done = _done_images(out)
+    keep = set(only) if only is not None else None
     n = 0
     with open(out, "a") as f:
         for rec in read_manifest(run_dir):
-            if rec["image"] in done:
+            if rec["image"] in done or (keep is not None and rec["image"] not in keep):
                 continue
             classes = [n for n, _ in rec["objects"]]
             raw = detector(str(img_root / rec["image"]), threshold=floor, classes=classes)
