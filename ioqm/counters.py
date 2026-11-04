@@ -39,8 +39,11 @@ COUNTERS = {
     # extra_class score is always 0 and must not be reported.
     "qwen3_vl_8b": ("Qwen3-VL-8B-Instruct asked for per-class counts (HF Qwen/Qwen3-VL-8B-Instruct)", 0.5,
                     "threshold unused: every VLM count has score 1.0"),
+    # Larger gold-judge candidate: ~66 GB of bf16 weights, so an 80 GB A100 only.
+    "qwen3_vl_32b": ("Qwen3-VL-32B-Instruct asked for per-class counts (HF Qwen/Qwen3-VL-32B-Instruct)", 0.5,
+                     "threshold unused: every VLM count has score 1.0"),
 }
-COUNTS_ONLY = {"qwen3_vl_8b"}   # counters whose extra_class is meaningless
+COUNTS_ONLY = {"qwen3_vl_8b", "qwen3_vl_32b"}   # counters whose extra_class is meaningless
 PARSE_ERROR = "__counter_parse_error__"   # label emitted when a VLM answer cannot be parsed
 DEFAULT_THRESHOLDS: Dict[str, float] = {k: v[1] for k, v in COUNTERS.items()}
 
@@ -140,6 +143,8 @@ def get_counter(name: str) -> Counter:
 
     if key == "qwen3_vl_8b":
         return _qwen3_vl_counter("Qwen/Qwen3-VL-8B-Instruct")
+    if key == "qwen3_vl_32b":
+        return _qwen3_vl_counter("Qwen/Qwen3-VL-32B-Instruct")
 
     raise AssertionError(key)
 

@@ -2,6 +2,8 @@
 
 *Drafted 2026-11-01. Companion document: [literature_review.md](literature_review.md).*
 
+> **Reframed on 2026-11-03.** The paper's question is now over-optimization of count control against counters. See [Decision (2026-11-03)](#decision-2026-11-03-reframe-around-over-optimization) at the end; the phases below remain as background and for the baselines.
+
 ## Goal and priority
 
 **Primary goal:** a text-to-image method that is state of the art on joint multi-class counting prompts ("3 A and 2 B and 4 C"). The claim must hold on IOQM and on at least one external benchmark.
@@ -235,3 +237,24 @@ RL-tuned model plus 3a self-correction plus best-of-N.
      - output saved as JSONL with image_id, generator and seed
    - **Labeling time (estimate):** ~30–60 s per image, so ~15–25 hours for 1,500 images.
 4. **Closed-model APIs: yes, but later.** Phase 2 starts with open models only. The harness gets an API backend interface now, so GPT-Image, Gemini image and Seedream can be added for the paper's final table without rework.
+
+
+## Decision (2026-11-03): reframe around over-optimization
+
+**Why.** The best-of-16 pilot (klein-4B, 480 prompts) showed that a counter scoring its own picks reports about 0.2 higher count accuracy than an independent counter does, and the gap grows with k. Meanwhile the benchmark-only contribution weakened: M3T2IBench and NumBench already cover multi-category counting, and a NeurIPS 2026 paper ("Verifier Choice is a Benchmark Design Variable") showed that verifier choice moves static scores. Nobody has measured what happens when generation is *optimized against* a counter.
+
+**Question.** Does optimizing an image generator against a counter improve counting, or only the counter's opinion?
+
+**Design** (best-of-k analogue of Gao et al. 2022, reward-model over-optimization):
+- **Proxies** (used for selection): YOLOv8x, Mask2Former, and an agreement ensemble of the two.
+- **Gold judge** (never used for selection): a VLM counter, Qwen3-VL-32B on an 80 GB GPU or Qwen3-VL-8B otherwise, chosen once per experiment. The code refuses a gold judge that is also a proxy.
+- **Human evidence:** (1) the gold judge's agreement with human labels on the stratified `queue_v1`; (2) human verdicts on the proxies' actual picks at k = 1 and k = 64 (`queue_picks`).
+- **Pressure axis:** k = 1 … 64 on the 480-prompt pilot, reported also as KL = log k − (k−1)/k. Estimated with the unbiased best-of-k estimator over all 64 seeds (`ioqm/overopt.py`).
+- **Mechanism section** (no GPU): within-prompt independence of per-type errors, trading of instances between types, and a clustered logistic regression of failure on prompt features including COCO co-occurrence PMI (`ioqm/analysis.py`).
+
+**Deferred.**
+- RL on klein-4B: needs a pilot showing that Flow-GRPO-style stochastic sampling works on a 4-step distilled model. The fallback is SD3.5-M.
+- Layout-plus-correction: kept as a later baseline, not this paper's question.
+- Beating Qwen-Image on raw accuracy: not a goal.
+
+**Target venue.** ICML (deadline usually late January) or NeurIPS (usually May); check exact dates.

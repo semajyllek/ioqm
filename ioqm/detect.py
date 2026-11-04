@@ -152,3 +152,15 @@ def score_run(
             for r in rows:
                 f.write(json.dumps(r) + "\n")
     return rows
+
+
+def load_scores(run_dir: Path, counter: str, tag: Optional[str] = None) -> List[dict]:
+    """Saved score rows for a counter (scripts/score.py writes them). The tag defaults to
+    the counter's default threshold, e.g. 't0.5'."""
+    from .counters import DEFAULT_THRESHOLDS
+    tag = tag or f"t{DEFAULT_THRESHOLDS[counter]}"
+    p = Path(run_dir) / "scores" / f"{counter}__{tag}.jsonl"
+    if not p.exists():
+        raise FileNotFoundError(f"{p} missing: run scripts/score.py --run_dir {run_dir} --detector {counter}")
+    with open(p) as f:
+        return [json.loads(l) for l in f if l.strip()]
