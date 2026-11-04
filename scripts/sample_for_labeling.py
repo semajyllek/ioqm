@@ -38,6 +38,9 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--exclude_queue", nargs="*", default=[])
+    ap.add_argument("--path_map", nargs=2, metavar=("FROM", "TO"), default=None,
+                    help="read --runs through a local mirror, e.g. /content/drive/MyDrive "
+                         "'~/Library/CloudStorage/GoogleDrive-.../My Drive'; the queue keeps the --runs paths")
     args = ap.parse_args()
 
     a_name, b_name = (resolve(c) for c in args.counters)
@@ -47,7 +50,8 @@ def main():
     by_run = {}
     for run, n in zip(args.runs, per_run):
         run_p = Path(run)
-        a, b = load_scores(run_p, a_name), load_scores(run_p, b_name)
+        read_p = Path(args.path_map[1] + run[len(args.path_map[0]):]) if args.path_map and run.startswith(args.path_map[0]) else run_p
+        a, b = load_scores(read_p, a_name), load_scores(read_p, b_name)
         by_run[run] = sample_run(str(run_p), a, b, n, a_name, b_name, DEFAULT_ALLOC, args.seed, exclude)
         sizes = collections.Counter(it["stratum"] for it in by_run[run])
         pop = {it["stratum"]: it["stratum_size"] for it in by_run[run]}
