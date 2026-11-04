@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import Any, Callable, Dict, Iterable, List, Mapping, Optional, Sequence, Union
 
 from .classes import canonicalize
+from .counters import PARSE_ERROR
 from .metrics import score_image
 
 Threshold = Union[float, Mapping[str, float]]
@@ -76,8 +77,8 @@ def detect_run(
     detector_name: str,
     floor: float = 0.05,
 ) -> int:
-    """Run `detector(image_path, threshold=floor)` on every manifest image not yet
-    detected. Resumable. Returns the number of newly processed images."""
+    """Run `detector(image_path, threshold=floor, classes=...)` on every manifest image
+    not yet detected. Resumable. Returns the number of newly processed images."""
     from .generate import images_dir, read_manifest
 
     run_dir = Path(run_dir)
@@ -90,7 +91,8 @@ def detect_run(
         for rec in read_manifest(run_dir):
             if rec["image"] in done:
                 continue
-            raw = detector(str(img_root / rec["image"]), threshold=floor)
+            classes = [n for n, _ in rec["objects"]]
+            raw = detector(str(img_root / rec["image"]), threshold=floor, classes=classes)
             f.write(json.dumps({"image": rec["image"], "detector": detector_name, "floor": floor,
                                 "dets": normalize_detections(raw)}) + "\n")
             f.flush()
@@ -129,6 +131,8 @@ def score_run(
     for rec in read_manifest(run_dir):
         if rec["image"] not in dets:
             continue
+        if any(d.get("label_raw") == PARSE_ERROR for d in dets[rec["image"]]):
+            continue  # unusable VLM answer: excluded rather than scored as zero counts
         expected = {n: int(c) for n, c in rec["objects"]}
         detected = count_detections(dets[rec["image"]], threshold)
         s = score_image(expected, detected)

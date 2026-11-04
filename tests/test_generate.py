@@ -77,7 +77,7 @@ def test_config_change_refused(tmp_path):
 def test_detect_and_score_end_to_end(tmp_path):
     run_generation(FakeBackend(), SPECS, [0, 1], tmp_path, log_every=0)
 
-    def fake_detector(path, threshold):
+    def fake_detector(path, threshold, classes=None):
         prompt = open(path).read().split("|")[0]
         if prompt == "2 dogs":
             return [{"label": "dog", "score": 0.9, "box": {}}, {"label": "dog", "score": 0.6, "box": {}}]
@@ -110,4 +110,4 @@ def test_images_path_pointer(tmp_path):
     (run / "manifest.jsonl").write_text((src / "manifest.jsonl").read_text())
     (run / "images_path.txt").write_text(str(src / "images"))
     assert len(completed(run)) == 3
-    assert detect_run(run, lambda p, threshold: [{"label": "dog", "score": 0.9, "box": {}}], "d") == 3
+    assert detect_run(run, lambda p, threshold, classes=None: [{"label": "dog", "score": 0.9, "box": {}}], "d") == 3
