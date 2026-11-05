@@ -59,6 +59,19 @@ def test_missing_image_is_regenerated(tmp_path):
     victim = read_manifest(tmp_path)[0]["image"]
     (tmp_path / "images" / victim).unlink()
     assert run_generation(FakeBackend(), SPECS, [0], tmp_path, log_every=0) == 1
+    assert len(read_manifest(tmp_path)) == 3          # duplicate manifest line collapsed
+
+
+def test_detect_skips_missing_image(tmp_path, capsys):
+    run_generation(FakeBackend(), SPECS, [0], tmp_path, log_every=0)
+    victim = read_manifest(tmp_path)[0]["image"]
+    (tmp_path / "images" / victim).unlink()
+    seen = []
+    det = lambda path, threshold, classes=None: seen.append(path) or []
+    assert detect_run(tmp_path, det, "fake") == 2
+    assert "1 manifest images are missing" in capsys.readouterr().out
+    run_generation(FakeBackend(), SPECS, [0], tmp_path, log_every=0)
+    assert detect_run(tmp_path, det, "fake") == 1     # picked up after regeneration
 
 
 def test_truncated_manifest_line_tolerated(tmp_path):

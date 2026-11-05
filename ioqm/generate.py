@@ -322,11 +322,15 @@ def run_generation(
 
 
 def read_manifest(out_dir: Path) -> List[dict]:
-    rows = []
+    """Manifest rows, one per image (the last line wins: an image regenerated
+    after its file went missing is listed twice)."""
+    rows: Dict[str, dict] = {}
     with open(Path(out_dir) / "manifest.jsonl") as f:
         for line in f:
             try:
-                rows.append(json.loads(line))
+                r = json.loads(line)
             except json.JSONDecodeError:
-                pass
-    return rows
+                continue
+            rows.pop(r["image"], None)
+            rows[r["image"]] = r
+    return list(rows.values())

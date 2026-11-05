@@ -90,18 +90,26 @@ def detect_run(
     done = _done_images(out)
     keep = set(only) if only is not None else None
     n = 0
+    missing: List[str] = []
     with open(out, "a") as f:
         for rec in read_manifest(run_dir):
             if rec["image"] in done or (keep is not None and rec["image"] not in keep):
                 continue
+            path = img_root / rec["image"]
+            if not path.exists():
+                missing.append(rec["image"])
+                continue
             classes = [n for n, _ in rec["objects"]]
-            raw = detector(str(img_root / rec["image"]), threshold=floor, classes=classes)
+            raw = detector(str(path), threshold=floor, classes=classes)
             f.write(json.dumps({"image": rec["image"], "detector": detector_name, "floor": floor,
                                 "dets": normalize_detections(raw)}) + "\n")
             f.flush()
             os.fsync(f.fileno())
             done.add(rec["image"])
             n += 1
+    if missing:
+        print(f"[ioqm] WARNING: {len(missing)} manifest images are missing on disk and were skipped "
+              f"(rerun generation to recreate them, then rerun this): {missing[:5]}")
     return n
 
 
