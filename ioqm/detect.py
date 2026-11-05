@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import json
 import os
+import time
 from pathlib import Path
 from typing import Any, Callable, Dict, Iterable, List, Mapping, Optional, Sequence, Union
 
@@ -77,6 +78,7 @@ def detect_run(
     detector_name: str,
     floor: float = 0.05,
     only: Optional[Iterable[str]] = None,
+    log_every: int = 500,
 ) -> int:
     """Run `detector(image_path, threshold=floor, classes=...)` on every manifest image
     not yet detected (or only on the image names in `only`). Resumable. Returns the
@@ -89,12 +91,14 @@ def detect_run(
     out.parent.mkdir(parents=True, exist_ok=True)
     done = _done_images(out)
     keep = set(only) if only is not None else None
+    todo = [rec for rec in read_manifest(run_dir)
+            if rec["image"] not in done and (keep is None or rec["image"] in keep)]
+    print(f"[ioqm] {detector_name}: {len(done)} already detected, {len(todo)} to go", flush=True)
     n = 0
     missing: List[str] = []
+    t_start = time.time()
     with open(out, "a") as f:
-        for rec in read_manifest(run_dir):
-            if rec["image"] in done or (keep is not None and rec["image"] not in keep):
-                continue
+        for rec in todo:
             path = img_root / rec["image"]
             if not path.exists():
                 missing.append(rec["image"])
@@ -107,6 +111,10 @@ def detect_run(
             os.fsync(f.fileno())
             done.add(rec["image"])
             n += 1
+            if log_every and n % log_every == 0:
+                rate = (time.time() - t_start) / n
+                print(f"[ioqm] {detector_name}: {n}/{len(todo)}  {rate:.2f}s/img  "
+                      f"eta {rate * (len(todo) - n) / 3600:.1f}h", flush=True)
     if missing:
         print(f"[ioqm] WARNING: {len(missing)} manifest images are missing on disk and were skipped "
               f"(rerun generation to recreate them, then rerun this): {missing[:5]}")
