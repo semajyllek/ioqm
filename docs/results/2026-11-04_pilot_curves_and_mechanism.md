@@ -39,3 +39,23 @@ Trading (correlation of signed errors between types): −0.030 (p = 0.16) and �
 Total instances dominates. Holding it fixed, more types (hence smaller per-type counts) is if anything easier. COCO co-occurrence does not predict failure. Held-out status is null, as it should be for models never trained on our splits.
 
 **Confound to resolve:** detectors also miscount crowded scenes, so part of the total-instances effect may be counter error. The gold judge and human labels decide this.
+
+---
+
+## Addendum 2026-11-05: detectors vs human labels (queue_v1, 300 images)
+
+One labeller, 300 stratified images (pilot klein-4B 16 seeds + z_image_turbo eval); 273 usable, 27 flagged ambiguous (9%; mostly in the both-wrong strata). Weighted = re-weighted to the whole run by inverse sampling probability.
+
+| Run | Counter | Weighted accuracy vs human | κ | Precision of "exact" | Recall | Counter's count accuracy | Human count accuracy | Mean signed count diff |
+|---|---|---|---|---|---|---|---|---|
+| pilot | YOLOv8x | 0.93 [0.88, 0.96] | 0.80 | 0.89 | 0.81 | 0.23 | 0.25 [0.18, 0.35] | −0.12 |
+| pilot | Mask2Former | 0.94 [0.89, 0.97] | 0.83 | 0.92 | 0.83 | 0.23 | 0.25 | −0.43 |
+| eval | YOLOv8x | 0.89 [0.82, 0.94] | 0.74 | 0.90 | 0.76 | 0.30 | 0.36 [0.26, 0.47] | −0.20 |
+| eval | Mask2Former | 0.90 [0.83, 0.95] | 0.77 | 0.93 | 0.77 | 0.30 | 0.36 | −0.33 |
+
+By stratum (as sampled): when both detectors say exact, the human agrees 69/70; when they disagree the human sides with Mask2Former 70/125 and YOLO 55/125; when both say wrong the human finds 5/77 exact.
+
+Readings:
+- At k = 1 both detectors are **pessimistic**: they undercount (miss instances) and understate count accuracy by 2–6 points. Precision of an "exact" verdict is ~0.9, recall ~0.8.
+- The agreement ensemble's "exact" verdict is almost always right at k = 1 (69/70), a candidate safe proxy; whether that survives selection pressure is the experiment.
+- The pilot's detector-vs-detector gap at k = 16 (+0.22) mixes two things: the selecting detector's false "exact" verdicts and the judging detector's missed true ones (recall ~0.8 caps what it can confirm). The gold judge and the human check of real picks separate them.
