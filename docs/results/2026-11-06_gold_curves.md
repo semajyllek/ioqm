@@ -15,6 +15,8 @@ Agreement with one human labeller on the stratified `queue_v1` sample, re-weight
 | | Mask2Former | 0.90 | 0.77 | 0.93 | 0.77 | 0.30 | 0.36 |
 | | **Qwen3-VL-8B** | **0.97** | **0.92** | 0.94 | 0.97 | 0.37 | 0.36 |
 
+Sensitivity: the labeller flagged ambiguity more readily in the picks round than in round 1, and 12 unflagged round-1 images carry notes (depicted objects on cups, background or partial instances, malformed bodies, plant pots as cups). Treating those as ambiguous too (261 usable) leaves the table essentially unchanged: Qwen3-VL κ 0.96 (pilot) and 0.94 (eval), detectors κ 0.74–0.83.
+
 The VLM judge is essentially unbiased on the headline number; both detectors undercount and understate accuracy. Open question: does the judge stay this good on images *selected* by a proxy? (`queue_picks`, 136 images, answers it.)
 
 ## 2. Curves (all 480 prompts)
