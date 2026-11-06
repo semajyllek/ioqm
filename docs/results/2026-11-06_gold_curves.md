@@ -53,3 +53,26 @@ The VLM judge is essentially unbiased on the headline number; both detectors und
 
 1. Human labels on `queue_picks` (136 images: each proxy's real pick at k = 1 and k = 64 for 50 prompts) → `picks_report.py`. This tests whether the gold judge itself is fooled by selection.
 2. Second generator for generality.
+
+---
+
+## 5. Humans on the real picks (`queue_picks`, 2026-11-06)
+
+50 random prompts; each proxy's actual pick among seeds 0..k−1 at k = 1 and k = 64; 136 distinct images, one labeller, blind to all verdicts. 27 flagged ambiguous (mostly partial or background objects and fused instances; 24% of k = 1 images, 17% of k = 64 images, so ambiguity does **not** rise under selection). `labels/picks_report.json`.
+
+Accuracy of the pick, ambiguous images excluded (n = 38–44 prompts per row):
+
+| Proxy | k | Human | Gold judge | Proxy's own verdict |
+|---|---|---|---|---|
+| any (same image) | 1 | 0.11 [0.03, 0.21] | 0.18 | 0.05–0.08 |
+| YOLOv8x | 64 | **0.56** [0.41, 0.72] | 0.56 | **0.77** |
+| Mask2Former | 64 | **0.53** [0.35, 0.68] | 0.55 | **0.80** |
+| Ensemble | 64 | **0.61** [0.46, 0.75] | 0.57 | 0.59 |
+
+Sensitivity, all 50 prompts: with ambiguous images counted as wrong, human accuracy at k = 64 is 0.44 / 0.42 / 0.54 (YOLO / M2F / ensemble) against self-verdicts 0.74 / 0.82 / 0.56; using the counts as entered it is 0.50 / 0.48 / 0.58. The conclusion is the same under every handling.
+
+Readings:
+- **Humans confirm the headline**: a single detector's picks at k = 64 are right about 55% of the time while the detector claims about 80%. The ~0.2–0.3 gap is real, not an artefact of the gold judge.
+- **The gold judge tracks humans on the picks** (within 0.05 at k = 64), so selection pressure is not fooling it on average. Image-level, it agrees with the human on 57/71 usable k = 64-only images (80%; 7 false "exact", 7 false "wrong"), noisier than on the random sample but unbiased.
+- **The ensemble is calibrated under pressure**: its self-verdict 0.59 vs human 0.61.
+- At k = 1 the gold judge reads 0.18 vs human 0.11 (7 vs 4 of 38): small n, worth watching.
