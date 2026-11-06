@@ -16,19 +16,19 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from ioqm.labels import read_labels, usable
+from ioqm.labels import read_label_files, usable
 from ioqm.metrics import bootstrap
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--queue", required=True)
-    ap.add_argument("--labels", required=True)
+    ap.add_argument("--labels", nargs="+", required=True, help="one annotator's label files; later override earlier")
     ap.add_argument("--out", default=None, help="JSON summary (default: next to the labels)")
     args = ap.parse_args()
 
     queue = [json.loads(l) for l in open(args.queue) if l.strip()]
-    labels = read_labels(Path(args.labels))
+    labels = read_label_files([Path(p) for p in args.labels])
     rows = []
     n_unusable = 0
     for it in queue:
@@ -56,7 +56,7 @@ def main():
             f = lambda e: f"{e.mean:.3f} [{e.lo:.3f},{e.hi:.3f}]"
             print(f"{proxy:28s} {k:>4} | {f(est['human']):>21} | {f(est['gold']):>21} | "
                   f"{f(est['proxy_self']):>21} | {len(rk)}")
-    out = Path(args.out) if args.out else Path(args.labels).with_name("picks_report.json")
+    out = Path(args.out) if args.out else Path(args.labels[0]).with_name("picks_report.json")
     out.write_text(json.dumps(summary, indent=1))
     print(f"\nwrote {out}")
 

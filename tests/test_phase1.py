@@ -242,3 +242,37 @@ def test_detect_run_only_subset(tmp_path):
     det = lambda p, threshold, classes=None: []
     assert detect_run(tmp_path, det, "d", only=names[:1]) == 1
     assert detect_run(tmp_path, det, "d") == 3          # the rest, later
+
+
+# ------------------------------------------------------------------ annotators and re-checks
+
+def _write(path, recs):
+    import json as _json
+    with open(path, "w") as f:
+        for r in recs:
+            f.write(_json.dumps(r) + "\n")
+
+
+def test_label_files_per_annotator_and_review(tmp_path):
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("label_cli", Path(__file__).resolve().parents[1] / "scripts" / "label.py")
+    cli = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(cli)
+    assert cli.labels_file(tmp_path, "v1", "labeler_1", False).name == "labels.jsonl"
+    assert cli.labels_file(tmp_path, "picks", "labeler_2", False).name == "labels_picks__labeler_2.jsonl"
+    assert cli.labels_file(tmp_path, "v1", "labeler_1", True).name == "labels__review.jsonl"
+
+
+def test_merge_review_overrides_and_needs_review(tmp_path):
+    from ioqm.labels import labelers_in, needs_review, read_label_files
+    a = tmp_path / "a.jsonl"
+    r = tmp_path / "r.jsonl"
+    _write(a, [{"item_id": "x", "counts": {"dog": 1}, "ambiguous": True, "notes": "", "labeler": "labeler_1"},
+               {"item_id": "y", "counts": {"dog": 2}, "ambiguous": False, "notes": "maybe 3", "labeler": "labeler_1"},
+               {"item_id": "z", "counts": {"dog": 2}, "ambiguous": False, "notes": " ", "labeler": "labeler_1"}])
+    _write(r, [{"item_id": "x", "counts": {"dog": 2}, "ambiguous": False, "notes": "", "labeler": "labeler_1"}])
+    m = read_label_files([a, r])
+    assert m["x"]["counts"] == {"dog": 2} and not m["x"]["ambiguous"]
+    base = read_label_files([a])
+    assert [k for k in "xyz" if needs_review(base[k])] == ["x", "y"]
+    assert labelers_in(a) == {"labeler_1"}

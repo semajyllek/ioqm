@@ -24,7 +24,7 @@ from __future__ import annotations
 import json
 import re
 from pathlib import Path
-from typing import Dict, Iterable, List, Mapping, Optional, Tuple
+from typing import Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
 
 from .classes import canonicalize
 
@@ -63,6 +63,24 @@ def read_labels(path: Path) -> Dict[str, dict]:
                 continue
             out[r["item_id"]] = r
     return out
+
+
+def read_label_files(paths: Sequence[Path]) -> Dict[str, dict]:
+    """Merge several label files of ONE annotator, later files overriding earlier ones
+    (e.g. the original pass, then a re-check under the written rules)."""
+    out: Dict[str, dict] = {}
+    for p in paths:
+        out.update(read_labels(p))
+    return out
+
+
+def labelers_in(path: Path) -> set:
+    return {r.get("labeler") for r in read_labels(path).values()}
+
+
+def needs_review(rec: Mapping) -> bool:
+    """Labels made before the written rules that a re-check should revisit."""
+    return bool(rec.get("ambiguous") or (rec.get("notes") or "").strip())
 
 
 def usable(rec: Mapping) -> bool:

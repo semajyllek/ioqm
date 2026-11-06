@@ -172,11 +172,16 @@ def launch(app, **kwargs):
         return app.launch(**kwargs)
 
 
-def build_app(queue_path: Path, labels_path: Path, labeler: str, path_map: PathMap = None):
+RUBRIC = Path(__file__).resolve().parents[1] / "docs" / "labeling_rubric.md"
+
+
+def build_app(queue_path: Path, labels_path: Path, labeler: str, path_map: PathMap = None,
+              queue: Optional[List[dict]] = None):
     import gradio as gr
     from .classes import prompt_noun
 
-    queue = load_queue(queue_path)
+    if queue is None:
+        queue = load_queue(queue_path)
 
     def fresh(idx: Optional[int]) -> dict:
         return {"idx": idx, "points": {}, "history": []}
@@ -197,7 +202,7 @@ def build_app(queue_path: Path, labels_path: Path, labeler: str, path_map: PathM
                 if i < len(classes) else gr.update(visible=False, value=0) for i in range(MAX_TYPES)]
         prefetch([image_path(queue[j], path_map) for j in range(st["idx"] + 1, min(len(queue), st["idx"] + 4))])
         msg = (f"Item {st['idx'] + 1} of {len(queue)}  ·  labelled {n_done}  ·  "
-               f"count every **{' / '.join(nouns)}** you can see, including partly hidden ones.  \n"
+               f"count every **{' / '.join(nouns)}** you can see, following the counting rules.  \n"
                f"Keys: **1/2/3** class · **z** undo · **a** ambiguous · **Enter** submit")
         return [render(image_path(item, path_map), classes, st["points"]),
                 gr.update(choices=nouns, value=nouns[0]), *nums, False, "", msg]
@@ -242,6 +247,9 @@ def build_app(queue_path: Path, labels_path: Path, labeler: str, path_map: PathM
     with gr.Blocks(title="IOQM counts") as app:
         st0 = fresh(next_index(queue, list(read_labels(labels_path))))
         state = gr.State(st0)
+        if RUBRIC.exists():
+            with gr.Accordion("Counting rules (click to show or hide)", open=False):
+                gr.Markdown(RUBRIC.read_text())
         progress = gr.Markdown()
         with gr.Row():
             with gr.Column(scale=3):
@@ -252,8 +260,8 @@ def build_app(queue_path: Path, labels_path: Path, labeler: str, path_map: PathM
                 with gr.Row():
                     b_undo = gr.Button("Undo click (z)", elem_id="ioqm-undo")
                     b_clear = gr.Button("Clear clicks")
-                amb = gr.Checkbox(label="Ambiguous: fused / partial / unclear class (a)", elem_id="ioqm-amb")
-                notes = gr.Textbox(label="Notes (optional)", lines=2)
+                amb = gr.Checkbox(label="Ambiguous: the rules don't settle it (a)", elem_id="ioqm-amb")
+                notes = gr.Textbox(label="Notes (what was unclear)", lines=2)
                 b_submit = gr.Button("Submit (Enter)", variant="primary", elem_id="ioqm-submit")
                 b_skip = gr.Button("Skip (image unusable)")
         view_out = [img, active, *nums, amb, notes, progress]

@@ -27,7 +27,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from ioqm.agreement import agreement, format_agreement
 from ioqm.counters import COUNTS_ONLY, DEFAULT_THRESHOLDS, resolve
 from ioqm.detect import score_run
-from ioqm.labels import HUMAN, labels_by_run, read_labels, write_human_detections
+from ioqm.labels import HUMAN, labels_by_run, read_label_files, write_human_detections
 from ioqm.sampling import labeled_weights
 
 
@@ -43,7 +43,8 @@ def rows_for(run: Path, counter: str):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--runs", nargs="*", default=[])
-    ap.add_argument("--labels", default=None)
+    ap.add_argument("--labels", nargs="+", default=None,
+                    help="one annotator's label files; later files override earlier (e.g. labels.jsonl labels__review.jsonl)")
     ap.add_argument("--queue", default=None, help="queue the labels came from (for weights)")
     ap.add_argument("--counters", nargs="+", default=["yolov8x", "mask2former"])
     ap.add_argument("--n_boot", type=int, default=1000)
@@ -52,7 +53,7 @@ def main():
     counters = [resolve(c) for c in args.counters]
     labels = {}
     if args.labels:
-        recs = list(read_labels(Path(args.labels)).values())
+        recs = list(read_label_files([Path(p) for p in args.labels]).values())
         labels = labels_by_run(recs)
         n_amb = sum(bool(r.get("ambiguous")) for r in recs)
         n_skip = sum(bool(r.get("skipped")) for r in recs)
